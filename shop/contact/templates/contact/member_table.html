@@ -1,0 +1,37 @@
+{% extends "homepage/wrapper.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% if member_list %}
+	<div class="container">
+		<table class="table" style="margin-top: 80px;">
+			<thead class="thead-dark">
+				<tr>
+					<th>Avatar</th>
+			        <th>First name</th>
+			        <th>Last name</th>
+			        <th>Status</th>
+			        <th>Email</th>
+			        <th>Number</th>
+			    </tr>
+
+				{% for member in member_list %}		    
+			    	<tbody>
+				      <tr>
+				      	<td><img src="{{ member.image.url }}" width="50" height="50"></td>
+				        <td>{{member.name}}</td>
+				        <td>{{member.surname}}</td>
+				        <td>{{member.status}}</td>
+				        <td>{{member.email}}</td>
+				        <td>{{member.number}}</td>
+				      </tr>
+				    </tbody>
+				{% endfor %}
+			</thead>
+		</table>
+	</div>
+{% endif %}
+	
+{% endblock content %}

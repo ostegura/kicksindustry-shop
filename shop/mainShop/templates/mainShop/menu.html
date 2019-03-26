@@ -1,0 +1,10 @@
+{% extends "homepage/wrapper.html" %}
+
+{% load static %}
+
+{% block content %}
+	{% for pos in menu_list %}
+		<h5>{{ pos.name }}</h5>
+		<a href="{% url 'mainShop:detail' pos.id %}"><p>{{ pos.name }}</p></a>
+	{% endfor %}
+{% endblock %}

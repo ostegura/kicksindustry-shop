@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Only Hipsters</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/wrapper.css' %}">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+
+
+		<div class="jumbotron">
+		    <div class="container">
+		    	<h1>Only Hipsters shop!</h1> <br>
+		    	<nav class="navbar navbar-dark bg-dark" style="margin-bottom: 20px;">
+				    <a href="{% url 'homepage:index' %}" class="navbar-brand"><button class="btn btn-outline-success" type="button" style="color: #00FF00; font-size: 21px;">Homepage</button></a>
+				    <a href="{% url 'mainShop:menu' %}" class="navbar-brand"><button class="btn btn-outline-success" type="button" style="color: #00FF00; font-size: 21px;">Shop-content</button></a>
+				    <a href="{% url 'contact:members' %}" class="navbar-brand"><button class="btn btn-outline-success" type="button" style="color: #00FF00; font-size: 21px;">Team members</button></a>
+				    <a href="{% url 'contact:contacts' %}" class="navbar-brand"><button class="btn btn-outline-success" type="button" style="color: #00FF00; font-size: 21px;">Contacts</button></a>
+				</nav>
+
+		      	{% block content %}
+		      	{% endblock %}
+		    </div>
+	  	</div>
+
+	  	<div class="container">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner1.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner2.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner3.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner4.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner5.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner6.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner7.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner8.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner9.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner10.jpg' %}">
+	            <img class="banner animate img-thumbnail" src="{% static 'homepage/images/banner11.jpg' %}">
+	            <hr>
+	   			&copy; All rights reserved 2018
+	   	</div>
+	        <script src="{% static 'js/banner.js' %}"></script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "homepage/wrapper.html" %}
+
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static "css/shoes.css" %}">
+
+{% block content %}
+
+<div class="content">
+	<ul>
+		{% for item in category.shoes_set.all %}
+			<li>{{ item.name }}</li>
+			<li>{{ item.model }}</li>
+			<li>{{ item.size }}</li> 
+			<br>			
+		{% endfor %}
+	</ul>
+</div>
+	
+{% endblock content %}

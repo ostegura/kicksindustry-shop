@@ -1,0 +1,23 @@
+{% extends "homepage/wrapper.html" %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="card-deck" style="display: flex;">
+
+  	{% for item in detail_list %}
+		 <div class="card">
+			<img class="card-img-top" src="{{ item.image.url }}" alt="{{ item.model }}" height="200" width="150">
+	   		<div class="card-body">
+		      <h5 class="card-title">{{item.name}} {{item.model}}</h5>
+		      <p class="card-text">Here will be some description</p>
+		      <p class="card-text">Avalaible size: {{item.size}}</p>
+	    	</div>    
+  		</div>
+  	{% endfor %}
+</div>
+
+{% endblock content %}
