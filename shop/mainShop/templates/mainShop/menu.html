@@ -3,8 +3,22 @@
 {% load static %}
 
 {% block content %}
-	{% for pos in menu_list %}
-		<h5>{{ pos.name }}</h5>
-		<a href="{% url 'mainShop:detail' pos.id %}"><p>{{ pos.name }}</p></a>
-	{% endfor %}
+
+		<div class="row">
+			{% for pos in menu_list %}
+			<div class="card col-md-4 mx-auto" style="margin-top: 10px;">
+			  <a href="{% url 'mainShop:detail' pos.id %}">
+			  	<img class="card-img-top rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 230px; height: 180px;">
+			  </a>
+			  <div class="card-body">
+			    <h5 class="card-title">{{ pos.name }}</h5>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <div class="card-footer">
+				    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white" style="margin-left: 45%;">Go</a>
+			    </div>
+			  </div>
+			</div>
+			{% endfor %}
+		</div>
+		
 {% endblock %}

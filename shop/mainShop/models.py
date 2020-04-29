@@ -1,10 +1,15 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
+from django.urls import reverse
 
 # Create your models here.
 
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
+    image = models.ImageField(default='', upload_to='category', validators=[
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name = 'Category'
@@ -13,6 +18,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('category-detail', kwargs={'slug': self.slug})
 
 # class CommonInfo(models.Model):
 #   # fields
@@ -25,11 +32,17 @@ class Category(models.Model):
 
 class Shoes(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='shoes')
+    image = models.ImageField(upload_to='shoes', validators=[
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
+    price = models.CharField(default='0$', max_length=64)
     size = models.PositiveIntegerField()
+    description = models.TextField(default='')
     is_active = models.BooleanField()
+    sale_cnt = models.PositiveIntegerField(default=0)
+    add_date = models.DateTimeField(verbose_name='added date', auto_now=True)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name = 'Shoes'
@@ -37,3 +50,15 @@ class Shoes(models.Model):
 
     def __str__(self):
         return self.model
+
+    def get_absolute_url(self):
+        return reverse('shoes-detail', kwargs={'slug': self.slug})
+
+
+# class UserOrder(models.Model):
+#     model = models.CharField(max_length=128)
+#     image = models.ImageField(upload_to='userOrder')
+#     mod_check = models.BooleanField()
+
+#     def __str__(self):
+#         return str(self.id)

@@ -7,15 +7,25 @@
 
 {% block content %}
 
-<div class="content">
-	<ul>
-		{% for item in category.shoes_set.all %}
-			<li>{{ item.name }}</li>
-			<li>{{ item.model }}</li>
-			<li>{{ item.size }}</li> 
-			<br>			
-		{% endfor %}
-	</ul>
-</div>
-	
+	<div class="card mb-3" style="margin-top: 10px;">
+	  <a href="#">
+	  	<img class="card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="{{ shoes.name }}" style="width: 500px; height: 400px;">
+	  </a>
+	  <div class="card-body" style="text-align: center;">
+		<h5 class="card-title">Name: {{ shoes.name }}</h5>
+	    <p class="card-text"><strong>Model:</strong> {{ shoes.model }}</p>
+	    <p class="card-text"><b>Description:</b> {{ shoes.description }}</p>
+	    <p class="card-text"><b>Size:</b> {{ shoes.size }}</p>
+	    <div class="card-footer" style="text-align: center;">
+	    	<p><span style="margin-right: 10%;"><b>Avalaible in shop:</b> {{shoes.is_active}}</span> | <span style="margin-left: 10%;"><b>Price:</b> {{ shoes.price }}</span></p>
+	    	<p>
+				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">
+		    		{% csrf_token %}
+		    		<input type="submit" value="Buy">
+				</form>	
+	    	</p>
+	    </div>
+	  </div>
+	</div>
+
 {% endblock content %}

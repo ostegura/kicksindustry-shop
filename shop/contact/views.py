@@ -13,7 +13,7 @@ class MemberView(generic.ListView):
     context_object_name = 'member_list'
 
     def get_queryset(self):
-        return TeamMember.objects.all().order_by("name")[:5]
+        return TeamMember.objects.all().order_by("pk")[:5]
 
 # def membersView(request):
 #     member_list = TeamMember.objects.all()

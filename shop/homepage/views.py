@@ -15,3 +15,6 @@ def contact(request):
                               '(077) 077-77-77 - Natasha'],
                    'mail_values': ['whatagreatemail@gmail.com',
                                    'whatagreatemail321@gmail.com']})
+
+
+# TODO

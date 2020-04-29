@@ -6,8 +6,9 @@ from mainShop import views
 app_name = 'mainShop'
 urlpatterns = [
     path('', views.MenuView.as_view(), name='menu'),
-    path('<int:pk>/', views.ShoesListView.as_view(), name='detail'),
-    path('<pk>/shoes',
-         views.ShoesDetailView.as_view(),
+    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('<slug>/',
+         views.shoes_detail_view,
          name='shoes'),
+    path('<shoes_id>/buy', views.buy, name='buy'),
 ]

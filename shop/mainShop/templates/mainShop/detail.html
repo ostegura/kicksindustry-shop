@@ -1,23 +1,42 @@
 {% extends "homepage/wrapper.html" %}
 
-
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static "mainShop/detail.css" %}">
 
 {% block content %}
 
-<div class="card-deck" style="display: flex;">
+{% if error_message %}
+	<center><strong> {{ error_message }} </strong></center>
+{% endif %}
 
-  	{% for item in detail_list %}
-		 <div class="card">
-			<img class="card-img-top" src="{{ item.image.url }}" alt="{{ item.model }}" height="200" width="150">
-	   		<div class="card-body">
-		      <h5 class="card-title">{{item.name}} {{item.model}}</h5>
-		      <p class="card-text">Here will be some description</p>
-		      <p class="card-text">Avalaible size: {{item.size}}</p>
-	    	</div>    
-  		</div>
-  	{% endfor %}
+<div class="container">
+	<table class="table" id="row" style="margin-top: 60px;">
+		<thead class="thead-dark">
+			<tr>
+				<th>Photo</th>
+				<th>Name</th>
+		        <th>Model</th>
+		        <th>Size</th>
+		        <th>Description</th>
+		        <th>Avalaible?</th>
+		    </tr>
+
+			{% for shoes in category.shoes_set.all %}		    
+		    	<tbody>
+			      <tr>
+			      	<td><a href="{% url 'mainShop:shoes' shoes.slug %}"><img src="{{ shoes.image.url }}" alt="{{ shoes.model }}" height="100" width="128"></td></a>
+			        <td>{{shoes.name}}</td>
+			        <td>{{shoes.model}}</td>
+			        <td>{{shoes.size}}</td>
+			        <td>{{shoes.description}}</td>
+			        <td>
+						{{shoes.is_active}}
+					</td>
+			      </tr>
+			    </tbody>
+			{% endfor %}
+		</thead>
+	</table>
 </div>
-
 {% endblock content %}
