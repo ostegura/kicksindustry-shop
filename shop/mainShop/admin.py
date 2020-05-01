@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mainShop.models import Category, Shoes
+from mainShop.models import Category, Shoes, UserOrder
 
 
 @admin.register(Category)
@@ -13,3 +13,8 @@ class ShoesAdmin(admin.ModelAdmin):
                     "is_active", "size", "sale_cnt", )
     list_filter = ['add_date', 'name', 'is_active']
     search_fields = ['name']
+
+
+@admin.register(UserOrder)
+class UserOrderAdmin(admin.ModelAdmin):
+    list_display = ("name", "surname",)

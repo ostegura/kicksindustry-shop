@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.mail import BadHeaderError
 # from django.urls import reverse
+from django.shortcuts import redirect
 
-
-from mainShop.models import Category, Shoes
+from mainShop.models import Category, Shoes, UserOrder
+from mainShop.forms import UserOrderForm
 
 
 class MenuView(generic.ListView):
@@ -40,3 +42,29 @@ def buy(request, shoes_id):
         shoes.save()
         return render(request, 'mainShop/success.html',
                       {'shoes': shoes, })
+    # TO DO: redirect to user order view and store data about user
+
+
+def userOrderView(request, id):
+    if request.method == 'GET':
+        form = UserOrderForm()
+    else:
+        form = UserOrderForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            surname = form.cleaned_data['surname']
+            address = form.cleaned_data['address']
+            from_email = form.cleaned_data['from_email']
+            phone = form.cleaned_data['phone']
+            try:
+                userOrder = UserOrder.objects.create(name=name,
+                                                     surname=surname,
+                                                     address=address,
+                                                     phone_no=phone,
+                                                     email=from_email,
+                                                     )
+                userOrder.save()
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return render(request, "mainShop/success.html")
+    return render(request, "mainShop/user_order.html", {'form': form})

@@ -11,4 +11,5 @@ urlpatterns = [
          views.shoes_detail_view,
          name='shoes'),
     path('<shoes_id>/buy', views.buy, name='buy'),
+    path('<shoes_id>/userorder', views.userOrderView, name='userOrder'),
 ]

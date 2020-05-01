@@ -15,12 +15,6 @@ class MemberView(generic.ListView):
     def get_queryset(self):
         return TeamMember.objects.all().order_by("pk")[:5]
 
-# def membersView(request):
-#     member_list = TeamMember.objects.all()
-#     template = 'contact/contacts.html'
-#     context = {'member_list': member_list}
-#     return render(request, template, context)
-
 
 def emailView(request):
     if request.method == 'GET':
