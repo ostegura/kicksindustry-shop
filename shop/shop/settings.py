@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'mainShop',
     'homepage',
     'contact',
+    'userOrder',
 ]
 
 MIDDLEWARE = [

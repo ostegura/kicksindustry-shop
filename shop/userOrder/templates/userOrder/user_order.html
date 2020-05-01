@@ -10,7 +10,7 @@
     	<h1 class="font-weight-light text-black">Please, fill fields below</h1>
  	</div>
 
-	<form method="post" action="{% url 'mainShop:userOrder' %}">
+	<form method="post" action="{% url 'mainShop:user_order' %}">
 	    {% csrf_token %}
 	    <div class="form-group">
 	    	<label for="form.name.id_for_label" style=" padding-left: 18px;">Name: </label>
