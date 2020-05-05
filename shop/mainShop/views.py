@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.mail import BadHeaderError
-from django.urls import reverse
+# from django.http import HttpResponseRedirect, HttpResponse
+# from django.core.mail import BadHeaderError
+# from django.urls import reverse
 # from django.shortcuts import redirect
 
 from mainShop.models import Category, Shoes
@@ -39,6 +39,4 @@ def buy(request, shoes_id):
     else:
         shoes.sale_cnt += 1
         shoes.save()
-        return render(request, 'mainShop/success.html',
-                      {'shoes': shoes, })
-    # TO DO: redirect to user order view and store data about user
+        return redirect('userOrder:order', id=shoes_id)

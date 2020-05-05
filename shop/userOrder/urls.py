@@ -5,5 +5,5 @@ from .views import UserOrderView
 
 app_name = 'userOrder'
 urlpatterns = [
-    path('', UserOrderView.as_view(), name='user_order'),
+    path('<int:id>/', UserOrderView, name='order'),
 ]

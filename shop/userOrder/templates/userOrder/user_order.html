@@ -10,8 +10,10 @@
     	<h1 class="font-weight-light text-black">Please, fill fields below</h1>
  	</div>
 
-	<form method="post" action="{% url 'mainShop:user_order' %}">
+	<form method="post">
+	    
 	    {% csrf_token %}
+	    
 	    <div class="form-group">
 	    	<label for="form.name.id_for_label" style=" padding-left: 18px;">Name: </label>
 		    {{form.name}}
@@ -27,6 +29,11 @@
 		    {{form.phone}}
   		</div>
 
+  		<div class="form-group">
+	    	<label for="form.phone.id_for_label" style=" padding-left: 18px;">Address: </label>
+		    {{form.address}}
+  		</div>
+
 	    <div class="form-group">
 	    	<label for="form.from_email.id_for_label" style=" padding-left: 18px;">E-mail: </label>
 		    {{form.from_email}}
@@ -34,7 +41,7 @@
   		</div>
 
 	    <div class="form-actions">
-	      <input type="submit" value="Buy!">
+	      <a href="#"><input type="submit" value="Submit"></a>
 	    </div>
 	</form>
 
