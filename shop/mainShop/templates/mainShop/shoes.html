@@ -21,7 +21,7 @@
 	    	<p>
 				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">
 		    		{% csrf_token %}
-		    		<input type="submit" value="Buy">
+		    		<input class="btn btn-primary bg-info text-white" type="submit" value="Buy">
 				</form>	
 	    	</p>
 	    </div>

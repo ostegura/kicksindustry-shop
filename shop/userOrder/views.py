@@ -9,19 +9,19 @@ from mainShop.models import Shoes
 
 
 def UserOrderView(request, id):
-    print('1')
+    # print('1')
     shoes = get_object_or_404(Shoes, id=id)
     if request.method == 'POST':
-        print('2')
+        # print('2')
         user_order = UserOrderForm(request.POST)
         if user_order.is_valid():
-            print('3')
+            # print('3')
             name = user_order.cleaned_data['name']
             surname = user_order.cleaned_data['surname']
             address = user_order.cleaned_data['address']
             from_email = user_order.cleaned_data['from_email']
             phone = user_order.cleaned_data['phone']
-            print('4')
+            # print('4')
             UserOrder.objects.create(name=name,
                                      surname=surname,
                                      address=address,
@@ -31,14 +31,17 @@ def UserOrderView(request, id):
                                      model=shoes.model,
                                      size=shoes.size
                                      )
-            print('5')
+            # print('5')
             return render(request, 'userOrder/success.html',
                           {'shoes': shoes})
         else:
-            print(user_order.errors)
+            # print(user_order.errors)
+            error_message = 'Please, fill fields correctly!'
+            return render(request, 'userOrder/user_order.html',
+                          {'form': user_order, 'error': error_message})
     else:
-        print('6')
+        # print('6')
         user_order = UserOrderForm()
-    print('7')
+    # print('7')
     return render(request, 'userOrder/user_order.html',
                   {'form': user_order})

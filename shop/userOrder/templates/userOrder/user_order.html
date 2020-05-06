@@ -2,12 +2,12 @@
 
 {% load static %}
 
+
 {% block content %}
-
+<hr>
 <center>
-
 	<div class="container">
-    	<h1 class="font-weight-light text-black">Please, fill fields below</h1>
+    	<h1 class="font-weight-light text-black">Fill fields below</h1>
  	</div>
 
 	<form method="post">
@@ -15,34 +15,47 @@
 	    {% csrf_token %}
 	    
 	    <div class="form-group">
+	    	<span style="color: red;">{{ form.name.errors }}</span>
 	    	<label for="form.name.id_for_label" style=" padding-left: 18px;">Name: </label>
 		    {{form.name}}
+		    <small id="nameHelp" class="form-text text-muted">Write your fisrt name.</small>
   		</div>
 
   		<div class="form-group">
+  			<span style="color: red;">{{ form.surname.errors }}</span>
 	    	<label for="form.surname.id_for_label" style=" padding-left: 18px;">Surname: </label>
 		    {{form.surname}}
+		    <small id="surnameHelp" class="form-text text-muted">Write your surname.</small>
   		</div>
 
   		<div class="form-group">
+  			<span style="color: red;">{{ form.phone.errors }}</span>
 	    	<label for="form.phone.id_for_label" style=" padding-left: 18px;">Phone: </label>
 		    {{form.phone}}
+		    <small id="phoneHelp" class="form-text text-muted">Write your phone.</small>
   		</div>
 
   		<div class="form-group">
+  			<span style="color: red;">{{ form.address.errors }}</span>
 	    	<label for="form.phone.id_for_label" style=" padding-left: 18px;">Address: </label>
 		    {{form.address}}
+		    <small id="addressHelp" class="form-text text-muted">Write your address where we have to deliver your order.</small>
   		</div>
 
 	    <div class="form-group">
+	    	<span style="color: red;">{{ form.from_email.errors }}</span>
 	    	<label for="form.from_email.id_for_label" style=" padding-left: 18px;">E-mail: </label>
 		    {{form.from_email}}
 		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   		</div>
 
 	    <div class="form-actions">
-	      <a href="#"><input type="submit" value="Submit"></a>
+	      <input class="btn btn-primary bg-info text-white" type="submit" value="Submit">
 	    </div>
+
+	    {% if error %}
+			<span style="font-size: 28px; color: red;"><strong> {{error}} </span></p>
+		{% endif %}
 	</form>
 
 </center>

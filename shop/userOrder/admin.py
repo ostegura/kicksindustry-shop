@@ -7,4 +7,5 @@ from .models import UserOrder
 
 @admin.register(UserOrder)
 class UserOrderAdmin(admin.ModelAdmin):
-    list_display = ("name", "surname",)
+    list_display = ("name", "surname", "email", "shoes_name",
+                    "model", "size", "address", "time", "mod_check")

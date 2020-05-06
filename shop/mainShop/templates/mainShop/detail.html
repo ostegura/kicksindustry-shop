@@ -19,7 +19,6 @@
 		        <th>Model</th>
 		        <th>Size</th>
 		        <th>Description</th>
-		        <th>Avalaible?</th>
 		    </tr>
 
 			{% for shoes in category.shoes_set.all %}		    
@@ -30,9 +29,6 @@
 			        <td>{{shoes.model}}</td>
 			        <td>{{shoes.size}}</td>
 			        <td>{{shoes.description}}</td>
-			        <td>
-						{{shoes.is_active}}
-					</td>
 			      </tr>
 			    </tbody>
 			{% endfor %}
