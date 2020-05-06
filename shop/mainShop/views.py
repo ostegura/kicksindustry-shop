@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django.http import HttpResponseRedirect, HttpResponse
 # from django.core.mail import BadHeaderError
 # from django.urls import reverse
@@ -11,17 +12,35 @@ from mainShop.models import Category, Shoes
 class MenuView(generic.ListView):
     template_name = 'mainShop/menu.html'
     context_object_name = 'menu_list'
+    paginate_by = 9
 
     def get_queryset(self):
         return Category.objects.all().order_by("name")[:10]
 
 
-class DetailView(generic.DetailView):
-    model = Category
-    template_name = 'mainShop/detail.html'
+# class DetailView(generic.DetailView):
+#     model = Category
+#     template_name = 'mainShop/detail.html'
 
-    def get_queryset(self):
-        return Category.objects.all()
+#     def get_queryset(self):
+#         return Category.objects.all()
+
+
+def detailView(request, id):
+    category = get_object_or_404(Category, id=id)
+    shoes_set = category.shoes_set.all()
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(shoes_set, 10)
+    try:
+        shoes_list = paginator.page(page)
+    except PageNotAnInteger:
+        shoes_list = paginator.page(1)
+    except EmptyPage:
+        shoes_list = paginator.page(paginator.num_pages)
+
+    return render(request, 'mainShop/detail.html', {'category': shoes_list})
 
 
 def shoes_detail_view(request, slug):

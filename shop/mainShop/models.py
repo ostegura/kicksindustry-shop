@@ -32,13 +32,25 @@ class Category(models.Model):
 
 
 class Shoes(models.Model):
+    SIZE_CHOICES = (
+        ("36", "36"),
+        ("37", "37"),
+        ("38", "38"),
+        ("39", "39"),
+        ("40", "40"),
+        ("41", "41"),
+        ("42", "43"),
+        ("44", "44"),
+        ("45", "45"),
+        ("46", "46"),
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shoes', validators=[
                               FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     price = models.CharField(default='0$', max_length=64)
-    size = models.PositiveIntegerField()
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES, default='0')
     description = models.TextField(default='')
     is_active = models.BooleanField()
     sale_cnt = models.PositiveIntegerField(default=0)
