@@ -5,12 +5,15 @@
 
 <link rel="stylesheet" type="text/css" href="{% static "css/shoes.css" %}">
 
+
 {% block content %}
 
 	<div class="card mb-3" style="margin-top: 10px;">
-	  <a href="#">
-	  	<img class="card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="{{ shoes.name }}" style="width: 500px; height: 400px;">
-	  </a>
+
+		{% for img in images %}
+			<img class="card-img-top rounded mx-auto d-block img-circle zoom" src="{{ img.image.url }}" alt="{{ shoes.name }}" style="width: 400px; height: 300px; margin-top: 10px;">
+		{% endfor %}
+
 	  <div class="card-body" style="text-align: center;">
 		<h5 class="card-title">Name: {{ shoes.name }}</h5>
 	    <p class="card-text"><strong>Model:</strong> {{ shoes.model }}</p>
@@ -27,5 +30,6 @@
 	    </div>
 	  </div>
 	</div>
+
 
 {% endblock content %}

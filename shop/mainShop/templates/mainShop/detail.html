@@ -17,7 +17,6 @@
 				<th>Photo</th>
 				<th>Name</th>
 		        <th>Model</th>
-		        <th>Size</th>
 		        <th>Description</th>
 		    </tr>
 
@@ -27,38 +26,36 @@
 			      	<td><a href="{% url 'mainShop:shoes' shoes.slug %}"><img src="{{ shoes.image.url }}" alt="{{ shoes.model }}" height="100" width="128"></td></a>
 			        <td>{{shoes.name}}</td>
 			        <td>{{shoes.model}}</td>
-			        <td>{{shoes.size}}</td>
 			        <td>{{shoes.description}}</td>
 			      </tr>
 			    </tbody>
 			{% endfor %}
 		</thead>
 	</table>
+</div>
 
+<div class="container" style="margin-left: 45%; margin-top: 25px;">
+	  <ul class="pagination">
+	  	
+	    {% if category.has_previous %}
+	      <li><a href="?page={{ category.previous_page_number }}" class="btn btn-primary">&laquo;</a></li>
+	    {% else %}
+	      <li class="disabled btn btn-primary"><span>&laquo;</span></li>
+	    {% endif %}
 
-	<div class="container" style="margin-left: 45%; margin-top: 25px;">
-		  <ul class="pagination">
-		  	
-		    {% if category.has_previous %}
-		      <li><a href="?page={{ category.previous_page_number }}" class="btn btn-primary">&laquo;</a></li>
-		    {% else %}
-		      <li class="disabled btn btn-primary"><span>&laquo;</span></li>
-		    {% endif %}
+	    {% for i in category.paginator.page_range %}
+	      {% if category.number == i %}
+	        <li class="active"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
+	      {% else %}
+	        <li><a href="?page={{ i }}" class="btn btn-primary">{{ i }}</a></li>
+	      {% endif %}
+	    {% endfor %}
 
-		    {% for i in category.paginator.page_range %}
-		      {% if category.number == i %}
-		        <li class="active"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
-		      {% else %}
-		        <li><a href="?page={{ i }}" class="btn btn-primary">{{ i }}</a></li>
-		      {% endif %}
-		    {% endfor %}
-
-		    {% if category.has_next %}
-		      <li><a href="?page={{ category.next_page_number }}" class="btn btn-primary">&raquo;</a></li>
-		    {% else %}
-		      <li class="disabled btn btn-primary"><span>&raquo;</span></li>
-		    {% endif %}
-		  </ul>
-	</div>
+	    {% if category.has_next %}
+	      <li><a href="?page={{ category.next_page_number }}" class="btn btn-primary">&raquo;</a></li>
+	    {% else %}
+	      <li class="disabled btn btn-primary"><span>&raquo;</span></li>
+	    {% endif %}
+	  </ul>
 </div>
 {% endblock content %}

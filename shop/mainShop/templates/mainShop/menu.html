@@ -4,46 +4,46 @@
 
 {% block content %}
 
-		<div class="row">
-			{% for pos in menu_list %}
-			<div class="card col-md-4 mx-auto" style="margin-top: 15px;">
-			  <a href="{% url 'mainShop:detail' pos.id %}">
-			  	<img class="card-img-top rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 230px; height: 180px;">
-			  </a>
-			  <div class="card-body">
-			    <h5 class="card-title">{{ pos.name }}</h5>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			    <div class="card-footer">
-				    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white" style="margin-left: 45%;">Go</a>
-			    </div>
-			  </div>
-			</div>
-			{% endfor %}
+	<div class="row">
+		{% for pos in menu_list %}
+		<div class="card col-md-4 mx-auto" style="margin-top: 25px;">
+		  <a href="{% url 'mainShop:detail' pos.id %}">
+		  	<img class="card-img-top rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 230px; height: 180px;">
+		  </a>
+		  <div class="card-body">
+		    <h5 class="card-title">{{ pos.name }}</h5>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <div class="card-footer">
+			    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white" style="margin-left: 45%;">Go</a>
+		    </div>
+		  </div>
 		</div>
+		{% endfor %}
+	</div>
 
-		<div class="container" style="margin-left: 45%; margin-top: 25px;">
-			  <ul class="pagination">
+	<div class="container" style="margin-left: 45%; margin-top: 25px;">
+		  <ul class="pagination">
 
-			    {% if page_obj.has_previous %}
-			      <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">&laquo;</a></li>
-			    {% else %}
-			      <li class="disabled btn btn-primary"><span>&laquo;</span></li>
-			    {% endif %}
+		    {% if page_obj.has_previous %}
+		      <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">&laquo;</a></li>
+		    {% else %}
+		      <li class="disabled btn btn-primary"><span>&laquo;</span></li>
+		    {% endif %}
 
-			    {% for i in paginator.page_range %}
-			      {% if page_obj.number == i %}
-			        <li class="active"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
-			      {% else %}
-			        <li><a href="?page={{ i }}" class="btn btn-primary">{{ i }}</a></li>
-			      {% endif %}
-			    {% endfor %}
+		    {% for i in paginator.page_range %}
+		      {% if page_obj.number == i %}
+		        <li class="active"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
+		      {% else %}
+		        <li><a href="?page={{ i }}" class="btn btn-primary">{{ i }}</a></li>
+		      {% endif %}
+		    {% endfor %}
 
-			    {% if page_obj.has_next %}
-			      <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">&raquo;</a></li>
-			    {% else %}
-			      <li class="disabled btn btn-primary"><span>&raquo;</span></li>
-			    {% endif %}
-			  </ul>
-		</div>
+		    {% if page_obj.has_next %}
+		      <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">&raquo;</a></li>
+		    {% else %}
+		      <li class="disabled btn btn-primary"><span>&raquo;</span></li>
+		    {% endif %}
+		  </ul>
+	</div>
 
 {% endblock %}

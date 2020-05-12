@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django.urls import reverse
 # from django.shortcuts import redirect
 
-from mainShop.models import Category, Shoes
+from mainShop.models import *
 
 
 class MenuView(generic.ListView):
@@ -15,20 +15,12 @@ class MenuView(generic.ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        return Category.objects.all().order_by("name")[:10]
-
-
-# class DetailView(generic.DetailView):
-#     model = Category
-#     template_name = 'mainShop/detail.html'
-
-#     def get_queryset(self):
-#         return Category.objects.all()
+        return Category.objects.all().order_by("name")
 
 
 def detailView(request, id):
     category = get_object_or_404(Category, id=id)
-    shoes_set = category.shoes_set.all()
+    shoes_set = category.shoes_set.all().order_by('id')
 
     page = request.GET.get('page', 1)
 
@@ -40,12 +32,16 @@ def detailView(request, id):
     except EmptyPage:
         shoes_list = paginator.page(paginator.num_pages)
 
-    return render(request, 'mainShop/detail.html', {'category': shoes_list})
+    return render(request, 'mainShop/detail.html', {'category': shoes_list, })
 
 
 def shoes_detail_view(request, slug):
-    shoes_slug = get_object_or_404(Shoes, slug=slug)
-    return render(request, 'mainShop/shoes.html', {'shoes': shoes_slug, })
+    shoes = get_object_or_404(Shoes, slug=slug)
+    images = ShoesImage.objects.filter(shoes_gallery__shoes=shoes)
+    sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes)
+    return render(request, 'mainShop/shoes.html', {'shoes': shoes,
+                                                   'images': images,
+                                                   'sizes': sizes, })
 
 
 def buy(request, shoes_id):

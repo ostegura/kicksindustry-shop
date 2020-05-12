@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.urls import reverse
-from django.core.validators import MinLengthValidator, int_list_validator
 
 # Create your models here.
 
@@ -22,35 +21,15 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category-detail', kwargs={'slug': self.slug})
 
-# class CommonInfo(models.Model):
-#   # fields
-
-#   # inherit this class to get it's fields
-
-#     class Meta:
-#         abstract = True
-
 
 class Shoes(models.Model):
-    SIZE_CHOICES = (
-        ("36", "36"),
-        ("37", "37"),
-        ("38", "38"),
-        ("39", "39"),
-        ("40", "40"),
-        ("41", "41"),
-        ("42", "43"),
-        ("44", "44"),
-        ("45", "45"),
-        ("46", "46"),
-    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shoes', validators=[
-                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])],)
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     price = models.CharField(default='0$', max_length=64)
-    size = models.CharField(max_length=2, choices=SIZE_CHOICES, default='0')
+    size = models.CharField(max_length=2, default='36')
     description = models.TextField(default='')
     is_active = models.BooleanField()
     sale_cnt = models.PositiveIntegerField(default=0)
@@ -66,3 +45,58 @@ class Shoes(models.Model):
 
     def get_absolute_url(self):
         return reverse('shoes-detail', kwargs={'slug': self.slug})
+
+
+""" Start of gallery """
+
+
+class ShoesGallery(models.Model):
+    shoes = models.OneToOneField(Shoes,
+                                 on_delete=models.CASCADE,)
+
+    class Meta:
+        verbose_name = 'ShoesGallery'
+        verbose_name_plural = 'ShoesGalleries'
+
+    def __str__(self):
+        return f'{self.shoes.model}'
+
+
+class ShoesImage(models.Model):
+    shoes_gallery = models.ForeignKey(ShoesGallery, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='shoes_detail', validators=[
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
+
+    class Meta:
+        verbose_name = "ShoesImage"
+        verbose_name_plural = "ShoesImages"
+
+
+""" End of gallery """
+
+
+""" Start of size-list"""
+
+
+class ModelSizeList(models.Model):
+    shoes = models.OneToOneField(Shoes,
+                                 on_delete=models.CASCADE,)
+
+    class Meta:
+        verbose_name = 'ModelSizeList'
+        verbose_name_plural = 'ModelSizeList'
+
+    def __str__(self):
+        return f'{self.shoes.name} + {self.shoes.model}'
+
+
+class ShoesSize(models.Model):
+    shoes_size = models.ForeignKey(ModelSizeList, on_delete=models.CASCADE)
+    model_size = models.CharField(max_length=2, default='36')
+
+    class Meta:
+        verbose_name = "ShoesSize"
+        verbose_name_plural = "ShoesSize"
+
+
+""" End of model size list """
