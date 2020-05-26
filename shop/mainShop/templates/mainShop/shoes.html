@@ -14,13 +14,19 @@
 			<img class="card-img-top rounded mx-auto d-block img-circle zoom" src="{{ img.image.url }}" alt="{{ shoes.name }}" style="width: 400px; height: 300px; margin-top: 10px;">
 		{% endfor %}
 
-	  <div class="card-body" style="text-align: center;">
-		<h5 class="card-title">Name: {{ shoes.name }}</h5>
-	    <p class="card-text"><strong>Model:</strong> {{ shoes.model }}</p>
-	    <p class="card-text"><b>Description:</b> {{ shoes.description }}</p>
-	    <p class="card-text"><b>Size:</b> {{ shoes.size }}</p>
+	  <div class="card-body" style="text-align: center; width: 50%; margin-left: 25%;">
+		<h5 class="card-title alert alert-info">{{ shoes.name }}</h5>
+	    <p class="card-text alert alert-info"><strong>Model:</strong> {{ shoes.model }}</p>
+	    <p class="card-text alert alert-info"><b>Description:</b> {{ shoes.description }}</p>
+	    <p class="card-text">
+			<ul class="list-group" style="width: 80px; margin-left: 42%;">
+				{% for size in sizes %}
+	    			<li class="list-group-item list-group-item-info">{{ size.model_size }}</li>
+	    		{% endfor %}			    
+			</ul>
+		</p>
 	    <div class="card-footer" style="text-align: center;">
-	    	<p><span style="margin-right: 10%;"><b>Avalaible in shop:</b> {{shoes.is_active}}</span> | <span style="margin-left: 10%;"><b>Price:</b> {{ shoes.price }}</span></p>
+	    	<p style="margin-top: 10px;"><span class="alert alert-success"><b>Avalaible in shop:</b> {{shoes.is_active}}</span> <span class="alert alert-success"><b>Price:</b> {{ shoes.price }}</span></p>
 	    	<p>
 				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">
 		    		{% csrf_token %}
@@ -30,6 +36,5 @@
 	    </div>
 	  </div>
 	</div>
-
 
 {% endblock content %}

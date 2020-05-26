@@ -29,6 +29,13 @@
   		</div>
 
   		<div class="form-group">
+  			<span style="color: red;">{{ form.size.errors }}</span>
+	    	<label for="form.size.id_for_label" style=" padding-left: 18px;">Size: </label>
+		    {{form.size}}
+		    <small id="sizeHelp" class="form-text text-muted">Write number of size you want to order.</small>
+  		</div>
+
+  		<div class="form-group">
   			<span style="color: red;">{{ form.phone.errors }}</span>
 	    	<label for="form.phone.id_for_label" style=" padding-left: 18px;">Phone: </label>
 		    {{form.phone}}

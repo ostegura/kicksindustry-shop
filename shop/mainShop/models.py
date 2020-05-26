@@ -87,7 +87,7 @@ class ModelSizeList(models.Model):
         verbose_name_plural = 'ModelSizeList'
 
     def __str__(self):
-        return f'{self.shoes.name} + {self.shoes.model}'
+        return f'{self.shoes.name}  {self.shoes.model}'
 
 
 class ShoesSize(models.Model):
@@ -97,6 +97,9 @@ class ShoesSize(models.Model):
     class Meta:
         verbose_name = "ShoesSize"
         verbose_name_plural = "ShoesSize"
+
+    def __str__(self):
+        return f'{self.model_size}'
 
 
 """ End of model size list """
