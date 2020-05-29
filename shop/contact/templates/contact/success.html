@@ -2,8 +2,14 @@
 
 {% block content %}
 
-<div class="content">
-	<h4>Success! Thank you for your message! Have a nice day:)</h4>
+<div class="container text-center">
+  <h1 class="display-3">Thank You!</h1>
+  <p class="lead">We will text you back. Have a nice day!</p>
+  <hr>
+  <p class="lead">
+    <a class="btn btn-primary btn-sm" href="{% url 'mainShop:menu' %}" role="button">Continue to catalog</a>
+  </p>
 </div>
+
 	
 {% endblock content %}

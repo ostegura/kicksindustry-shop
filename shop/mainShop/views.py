@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 # from django.http import HttpResponseRedirect, HttpResponse
 # from django.core.mail import BadHeaderError
 # from django.urls import reverse
@@ -16,6 +17,24 @@ class MenuView(generic.ListView):
 
     def get_queryset(self):
         return Category.objects.all().order_by("name")
+
+
+class MaleListView(generic.ListView):
+    template_name = 'mainShop/male.html'
+    context_object_name = 'male_list'
+    paginate_by = 9
+
+    def get_queryset(self):
+        return Category.objects.filter(sex='male').order_by("name")
+
+
+class FemaleListView(generic.ListView):
+    template_name = 'mainShop/female.html'
+    context_object_name = 'female_list'
+    paginate_by = 9
+
+    def get_queryset(self):
+        return Category.objects.filter(sex='female').order_by("name")
 
 
 def detailView(request, id):
@@ -38,10 +57,12 @@ def detailView(request, id):
 def shoes_detail_view(request, slug):
     shoes = get_object_or_404(Shoes, slug=slug)
     images = ShoesImage.objects.filter(shoes_gallery__shoes=shoes)
-    sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes)
+    sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
+    size_table = shoes.category.size_table
     return render(request, 'mainShop/shoes.html', {'shoes': shoes,
                                                    'images': images,
-                                                   'sizes': sizes, })
+                                                   'sizes': sizes,
+                                                   'size_table': size_table})
 
 
 def buy(request, shoes_id):

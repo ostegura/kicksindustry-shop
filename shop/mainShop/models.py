@@ -7,16 +7,20 @@ from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
+    sex = models.CharField(max_length=64, default='unisex')
     image = models.ImageField(default='', upload_to='category', validators=[
-                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])])
+    size_table = models.ImageField(upload_to='size_table', validators=[
+        FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],
+        default='noimage.jpg')
     slug = models.SlugField(unique=True)
 
     class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Фирма'
+        verbose_name_plural = 'Фирма'
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.sex}'
 
     def get_absolute_url(self):
         return reverse('category-detail', kwargs={'slug': self.slug})
@@ -25,11 +29,10 @@ class Category(models.Model):
 class Shoes(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shoes', validators=[
-                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])],)
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],)
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     price = models.CharField(default='0$', max_length=64)
-    size = models.CharField(max_length=2, default='36')
     description = models.TextField(default='')
     is_active = models.BooleanField()
     sale_cnt = models.PositiveIntegerField(default=0)
@@ -37,8 +40,8 @@ class Shoes(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        verbose_name = 'Shoes'
-        verbose_name_plural = 'Shoes'
+        verbose_name = 'Модель'
+        verbose_name_plural = 'Модель'
 
     def __str__(self):
         return self.model
@@ -55,8 +58,8 @@ class ShoesGallery(models.Model):
                                  on_delete=models.CASCADE,)
 
     class Meta:
-        verbose_name = 'ShoesGallery'
-        verbose_name_plural = 'ShoesGalleries'
+        verbose_name = 'Галерея'
+        verbose_name_plural = 'Галереи'
 
     def __str__(self):
         return f'{self.shoes.model}'
@@ -65,11 +68,15 @@ class ShoesGallery(models.Model):
 class ShoesImage(models.Model):
     shoes_gallery = models.ForeignKey(ShoesGallery, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shoes_detail', validators=[
-                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg'])])
+                              FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],
+                              default='noimage.jpg')
 
     class Meta:
-        verbose_name = "ShoesImage"
-        verbose_name_plural = "ShoesImages"
+        verbose_name = "Фото обуви"
+        verbose_name_plural = "Фото обуви"
+
+    def __str__(self):
+        return f'{self.shoes_gallery.shoes.name} {self.shoes_gallery.shoes.model}'
 
 
 """ End of gallery """
@@ -83,8 +90,8 @@ class ModelSizeList(models.Model):
                                  on_delete=models.CASCADE,)
 
     class Meta:
-        verbose_name = 'ModelSizeList'
-        verbose_name_plural = 'ModelSizeList'
+        verbose_name = 'Ключ на размеры для модели'
+        verbose_name_plural = 'Ключ на размеры для модели'
 
     def __str__(self):
         return f'{self.shoes.name}  {self.shoes.model}'
@@ -95,11 +102,11 @@ class ShoesSize(models.Model):
     model_size = models.CharField(max_length=2, default='36')
 
     class Meta:
-        verbose_name = "ShoesSize"
-        verbose_name_plural = "ShoesSize"
+        verbose_name = "Доступные размеры"
+        verbose_name_plural = "Доступные размеры"
 
     def __str__(self):
-        return f'{self.model_size}'
+        return f'Size: {self.model_size}, {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
 
 
 """ End of model size list """
