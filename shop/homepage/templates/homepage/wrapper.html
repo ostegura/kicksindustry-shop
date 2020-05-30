@@ -10,6 +10,8 @@
       <link rel="stylesheet" type="text/css" href="{% static 'css/wrapper.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/welcome_text.css' %}">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -19,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="font-size: 19px; font-weight: bold;">
       <div class="container">
         <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
-          <img src="{% static 'homepage/images/logo.png' %}" alt="" style="height: 75px; width: 150px; margin-left: 50%;">
+          <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="height: 75px; width: 150px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -62,7 +64,7 @@
 
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('/static/homepage/images/b1.png')">
+        <div class="carousel-item active" style="background-image: url('/static/homepage/images/b1.png');">
         </div>
         <div class="carousel-item" style="background-image: url('/static/homepage/images/b2.jpg')">
         </div>
@@ -90,10 +92,10 @@
         {% block content %}
         {% endblock %}    
     </div>
-      
+
     <hr>
       <!-- Footer -->
-    <footer class="page-footer font-small stylish-color-dark pt-4 jumbotron jumbotron-fluid">
+    <footer class="page-footer font-small" style="font-family: sans-serif;">
 
       <!-- Footer Links -->
       <div class="container text-center text-md-left">
@@ -104,7 +106,7 @@
 
           <div class="col-md-4 mx-auto">
             <!-- Content -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+            <h4 class="font-weight-bold text-uppercase mt-3 mb-4" style="font-style: italic;">Kicks Industry</h4>
             <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
             consectetur
             adipisicing elit. Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
@@ -116,7 +118,9 @@
           <!-- Grid column -->
           <div class="col-md-2 mx-auto">
               <!-- Links -->
-              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Kicks Industry</h5>
+              <div class="d-flex justify-content-center">
+                <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="width: 80px; height: 40px;">
+              </div>
 
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{% url 'homepage:index' %}">Homepage</a></li>

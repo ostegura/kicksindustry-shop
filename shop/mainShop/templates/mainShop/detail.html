@@ -10,16 +10,16 @@
 	<center><strong> {{ error_message }} </strong></center>
 {% endif %}
 
-<div class="container">
+<div class="container" style="font-family: sans-serif;">
 	<div class="row">
 		{% for shoes in category %}
-			<div class="card col-md-4 mx-auto" style="width: 16rem; height: auto; margin-top: 10px;">
+			<div class="card col-md-4 mx-auto shadow" style="width: 16rem; height: auto; margin-top: 10px;">
 			  <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 250px; margin-top: 10px;"></a>
 			  <div class="card-body">
 			    <h5 class="card-title" style="text-align: center; margin: auto;">{{ shoes.name }} {{ shoes.model }}</h5>
 			    <p class="card-text">{{ shoes.description }}</p>
 			    <div class="d-flex justify-content-center">
-				    <p><span class="alert alert-success" style="font-style: italic;"><b>Price:</b> {{ shoes.price }}</span></p>
+				    <p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Price:</b> {{ shoes.price }}</span></p>
 			    </div>
 			    <div class="d-flex justify-content-center">
 			    	<a href="{% url 'mainShop:shoes' shoes.slug %}" class="btn btn-primary">Buy</a>
@@ -30,7 +30,8 @@
 	</div>
 </div>
 
-<div class="container" style="margin-left: 45%; margin-top: 25px;">
+<br>
+<div class="container d-flex justify-content-center" style="font-family: sans-serif;">
 	  <ul class="pagination">
 	  	
 	    {% if category.has_previous %}

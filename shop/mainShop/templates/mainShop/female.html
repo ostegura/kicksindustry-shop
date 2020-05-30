@@ -4,9 +4,9 @@
 
 {% block content %}
 
-	<div class="row">
+	<div class="row" style="font-family: sans-serif;">
 		{% for pos in female_list %}
-		<div class="card col-md-4 mx-auto" style="margin-top: 25px;">
+		<div class="card col-md-4 mx-auto shadow" style="margin-top: 25px;">
 		  <a href="{% url 'mainShop:detail' pos.id %}">
 		  	<img class="card-img-top img-fluid rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 240px;">
 		  </a>
@@ -22,7 +22,7 @@
 	</div>
 
 	<br>
-	<div class="container d-flex justify-content-center">
+	<div class="container d-flex justify-content-center" style="font-family: sans-serif;">
 		  <ul class="pagination">
 
 		    {% if page_obj.has_previous %}

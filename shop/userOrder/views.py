@@ -5,13 +5,15 @@ from django.http import HttpResponse
 
 from .forms import UserOrderForm
 from .models import UserOrder
-from mainShop.models import Shoes
+from mainShop.models import Shoes, ShoesSize
 # Create your views here.
 
 
 def UserOrderView(request, id):
     # print('1')
     shoes = get_object_or_404(Shoes, id=id)
+    size_list = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
+
     if request.method == 'POST':
         # print('2')
         user_order = UserOrderForm(request.POST)
@@ -55,10 +57,12 @@ def UserOrderView(request, id):
             return render(request, 'userOrder/user_order.html',
                           {'form': user_order,
                            'error': error_message,
+                           'size_list': size_list
                            })
     else:
         # print('6')
         user_order = UserOrderForm()
     # print('7')
     return render(request, 'userOrder/user_order.html',
-                  {'form': user_order})
+                  {'form': user_order,
+                   'size_list': size_list})

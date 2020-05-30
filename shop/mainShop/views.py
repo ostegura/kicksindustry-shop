@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
 # from django.http import HttpResponseRedirect, HttpResponse
 # from django.core.mail import BadHeaderError
 # from django.urls import reverse

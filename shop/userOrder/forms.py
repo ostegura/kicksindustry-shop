@@ -2,6 +2,10 @@ from django import forms
 from django.core.validators import MinLengthValidator, int_list_validator
 
 
+def validate_size(value):
+    pass
+
+
 class UserOrderForm(forms.Form):
     name = forms.CharField(max_length=64, required=True)
     surname = forms.CharField(max_length=64, required=True)
