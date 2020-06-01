@@ -6,13 +6,12 @@
 
 	<div class="row" style="font-family: sans-serif;">
 		{% for pos in menu_list %}
-		<div class="card col-md-3 mx-auto shadow" style="margin-top: 25px;">
+		<div class="card mx-auto d-flex justify-content-center shadow" style="margin-top: 25px; margin-right: 0;">
 		  <a href="{% url 'mainShop:detail' pos.id %}">
-		  	<img class="card-img-top img-fluid rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 240px;">
+		  	<img class="card-img-top img-fluid rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 240px; height: 180px;">
 		  </a>
 		  <div class="card-body">
-		    <h5 class="card-title text-center mx-auto">{{ pos.name }}</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <h5 class="card-title text-center mx-auto"><a class="text-dark" href="{% url 'mainShop:detail' pos.id %}">  {{ pos.name }} ({{ pos.sex }})</a></h5>
 		    <div class="card-footer d-flex justify-content-center">
 			    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white">Go</a>
 		    </div>

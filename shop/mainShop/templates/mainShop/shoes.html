@@ -71,6 +71,21 @@
 
 	  <div class="card-body" style="text-align: center; margin: auto;">
 		<h5 class="card-title alert alert-info text-dark">{{ shoes.name }} {{ shoes.model }}</h5>
+		
+		<p class="card-text">
+			<div class="d-flex justify-content-center">
+				{% if shoes.is_active == True %}
+			    	<div class="d-flex justify-content-center">
+				    	<p style="margin-top: 10px;"><span class="alert alert-success text-dark"><b>В наличии</b></span></p>
+			    	</div>
+		    	{% else %}
+			    	<div class="d-flex justify-content-center">
+				    	<p style="margin-top: 10px;"><span class="alert alert-danger text-dark"><b>Нет в наличии</b></span></p>
+			    	</div>
+		    	{% endif %}
+		    </div>
+		</p>
+
 	    <p class="card-text">
 	        <div class="form-group d-flex justify-content-center">
 	            <label for="size"><b>Размеры:</b></label>
@@ -187,14 +202,22 @@
 		  </div>
 		</div>
 
-	    <div class="card-footer" style="margin: auto;">
-	    	<div class="d-flex justify-content-center">
-		    	<p style="margin-top: 10px;"><span class="alert alert-success text-dark"><b>В наличии:</b> {{shoes.is_active}}</span></p>
-	    	</div>
+	    <div class="card-footer" style="margin: auto;">	    	
 
-	    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-	    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }}</span></p>
-	    	</div>
+	    	{% if shoes.discount == True %}
+		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
+		    		<p><span class="alert alert-danger text-dark" style="font-size: 19px; font-style: italic;"><s><b>Цена:</b> {{ shoes.price }}</s> </span></p>
+		    	</div>
+		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
+		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }}</span></p>
+		    	</div>	
+		    {% else %}
+		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
+		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }}</span></p>
+		    	</div>
+	    	{% endif %}
+
+	    	
 
 	    	<div class="d-flex justify-content-center" style="margin-top: 10px;">
 				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">

@@ -10,8 +10,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Shoes)
 class ShoesAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'model',
-                    'is_active', 'sale_cnt', )
-    list_filter = ['add_date', 'name', 'is_active']
+                    'is_active', 'sale_cnt', 'discount', )
+    list_filter = ['add_date', 'name', 'is_active', 'discount']
     search_fields = ['name']
 
 

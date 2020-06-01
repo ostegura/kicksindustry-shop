@@ -12,7 +12,7 @@ from mainShop.models import *
 class MenuView(generic.ListView):
     template_name = 'mainShop/menu.html'
     context_object_name = 'menu_list'
-    paginate_by = 9
+    paginate_by = 12
 
     def get_queryset(self):
         return Category.objects.all().order_by("name")
@@ -21,7 +21,7 @@ class MenuView(generic.ListView):
 class MaleListView(generic.ListView):
     template_name = 'mainShop/male.html'
     context_object_name = 'male_list'
-    paginate_by = 9
+    paginate_by = 12
 
     def get_queryset(self):
         return Category.objects.filter(sex='male').order_by("name")
@@ -30,7 +30,7 @@ class MaleListView(generic.ListView):
 class FemaleListView(generic.ListView):
     template_name = 'mainShop/female.html'
     context_object_name = 'female_list'
-    paginate_by = 9
+    paginate_by = 12
 
     def get_queryset(self):
         return Category.objects.filter(sex='female').order_by("name")
