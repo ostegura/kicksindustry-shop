@@ -30,6 +30,7 @@ class Shoes(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shoes', validators=[
                               FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],)
+    articul = models.CharField(max_length=64, default='')
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     price = models.CharField(max_length=64, default='1$')
@@ -37,6 +38,7 @@ class Shoes(models.Model):
     price_after_discount = models.CharField(max_length=64, default='0$', blank=True)
     description = models.TextField(default='')
     is_active = models.BooleanField()
+    quantity = models.PositiveIntegerField(default=0)
     sale_cnt = models.PositiveIntegerField(default=0)
     add_date = models.DateTimeField(verbose_name='added date', auto_now=True)
     slug = models.SlugField(unique=True)
@@ -108,7 +110,7 @@ class ShoesSize(models.Model):
         verbose_name_plural = "Доступные размеры"
 
     def __str__(self):
-        return f'Size: {self.model_size}, {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
+        return f'Articul: {self.shoes_size.shoes.articul}, Size: {self.model_size}, Shoes: {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
 
 
 """ End of model size list """

@@ -9,10 +9,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Shoes)
 class ShoesAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'model',
+    list_display = ('name', 'category', 'articul', 'model',
                     'is_active', 'sale_cnt', 'discount', )
-    list_filter = ['add_date', 'name', 'is_active', 'discount']
-    search_fields = ['name']
+    list_filter = ['add_date', 'name', 'is_active', 'discount', 'quantity']
+    search_fields = ['name', 'articul']
 
 
 @admin.register(ShoesGallery)
@@ -34,4 +34,4 @@ class ModelSizeListAdmin(admin.ModelAdmin):
 
 @admin.register(ShoesSize)
 class ShoesSizeAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['model_size', 'shoes_size__shoes__articul']
