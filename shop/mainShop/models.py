@@ -16,8 +16,8 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        verbose_name = 'Фирма'
-        verbose_name_plural = 'Фирма'
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренды'
 
     def __str__(self):
         return f'{self.name} {self.sex}'

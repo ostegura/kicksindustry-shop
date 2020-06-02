@@ -19,7 +19,7 @@
 					
 						<!-- Modal -->
 						<div class="modal fade" id="image{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+						  <div class="modal-dialog modal-lg" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <h6 class="modal-title" id="exampleModalLongTitle">{{ shoes.name }} {{ shoes.model }}</h6>
@@ -47,7 +47,7 @@
 				
 					<!-- Modal -->
 					<div class="modal fade" id="core-image-zoom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					  <div class="modal-dialog modal-lg" role="document">
 					    <div class="modal-content">
 					      <div class="modal-body">
 
@@ -70,7 +70,7 @@
 		</div>
 
 	  <div class="card-body" style="text-align: center; margin: auto;">
-		<h5 class="card-title alert alert-info text-dark">{{ shoes.name }} {{ shoes.model }}</h5>
+		<h5 class="card-title text-dark">{{ shoes.name }} {{ shoes.model }}</h5>
 		
 		<p class="card-text">
 			<div class="d-flex justify-content-center">
@@ -230,3 +230,9 @@
 	</div>
 
 {% endblock content %}
+
+<script type="text/javascript">
+$('*').on('shown.bs.modal', function () {
+ 	$('#myInput').trigger('focus')
+})
+</script>

@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.core.mail import BadHeaderError
-# from django.urls import reverse
+from django.db.models import Q
+
+import operator
 # from django.shortcuts import redirect
 
 from mainShop.models import *
@@ -35,10 +35,41 @@ class FemaleListView(generic.ListView):
     def get_queryset(self):
         return Category.objects.filter(sex='female').order_by("name")
 
+# start of menu detail view (example: nike (male) -> nike shoes)
+
+
+def get_shoes_queryset(query=None, id=int()):
+    queryset = []
+    queries = query.split(" ")
+
+    category = get_object_or_404(Category, id=id)
+    shoes_set = Shoes.objects.filter(category=category).order_by('id')
+
+    sizes_list = []
+    for shoes in shoes_set:
+        sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
+        sizes_list.append(tuple(sizes))
+
+    for q in queries:
+        shoes = shoes_set.filter(
+            category=category
+        ).filter(
+            Q(name__icontains=q) | Q(model__icontains=q) | Q(description__icontains=q)
+        ).distinct()
+
+        for pair in shoes:
+            queryset.append(pair)
+
+    return list(set(queryset))
+
 
 def detailView(request, id):
-    category = get_object_or_404(Category, id=id)
-    shoes_set = category.shoes_set.all().order_by('id')
+    query = ""
+    if request.GET:
+        query = request.GET['q']
+
+    shoes_set = sorted(get_shoes_queryset(query, id),
+                       key=operator.attrgetter('name'))
 
     page = request.GET.get('page', 1)
 
@@ -50,8 +81,11 @@ def detailView(request, id):
     except EmptyPage:
         shoes_list = paginator.page(paginator.num_pages)
 
-    return render(request, 'mainShop/detail.html', {'category': shoes_list, })
+    return render(request, 'mainShop/detail.html', {'category': shoes_list,
+                                                    'query': str(query)})
 
+
+# end of menu detail view (example: nike (male) -> nike shoes)
 
 def shoes_detail_view(request, slug):
     shoes = get_object_or_404(Shoes, slug=slug)

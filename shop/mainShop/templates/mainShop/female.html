@@ -6,13 +6,13 @@
 
 	<div class="row" style="font-family: sans-serif;">
 		{% for pos in female_list %}
-		<div class="card col-md-4 mx-auto shadow" style="margin-top: 25px;">
+		<div class="card mx-auto d-flex justify-content-center shadow" style="margin-top: 25px;">
 		  <a href="{% url 'mainShop:detail' pos.id %}">
 		  	<img class="card-img-top img-fluid rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 240px;">
 		  </a>
 		  <div class="card-body">
-		    <h5 class="card-title" style="text-align: center; margin: auto;">{{ pos.name }}</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <h5 class="card-title mb-3 mx-auto text-center">{{ pos.name }}</h5>
+		    <p class="card-text text-left">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 		    <div class="card-footer d-flex justify-content-center">
 			    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white">Go</a>
 		    </div>
