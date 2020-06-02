@@ -18,75 +18,43 @@
       <script src="{% static 'js/banner.js' %}"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="font-size: 18px; font-weight: bold;">
-      <div class="container">
-        <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
-          <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="height: 50px; width: 100px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
-          <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-              <a class="nav-link active" href="{% url 'homepage:index' %}">Homepage</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'mainShop:menu' %}">Catalogue</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'mainShop:male' %}">For men</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'mainShop:female' %}">For women</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact:members' %}">Team members</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact:contacts' %}">Contact us</a>
-            </li>
-          </ul>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="font-size: 18px; font-weight: bold;">
+        <div class="container">
+          <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
+            <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="height: 50px; width: 100px;">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+            <ul class="nav nav-pills justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'homepage:index' %}">Homepage</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:menu' %}">Catalogue</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:male' %}">For men</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:female' %}">For women</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact:members' %}">Team members</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact:contacts' %}">Contact us</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>  
+      </nav>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-      </ol>
 
-      <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('/static/homepage/images/b1.png');">
-        </div>
-        <div class="carousel-item" style="background-image: url('/static/homepage/images/b2.jpg')">
-        </div>
-        <div class="carousel-item" style="background-image: url('/static/homepage/images/b3.jpg')">
-        </div>
-        <div class="carousel-item" style="background-image: url('/static/homepage/images/b4.jpg')">
-        </div>
-        <div class="carousel-item" style="background-image: url('/static/homepage/images/b5.jpg')">
-        </div>
-        <div class="carousel-item" style="background-image: url('/static/homepage/images/b6.jpg')">
-        </div>
-      </div>
-
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
+    {% block carousele %}
+    {% endblock%}
 
     <div class="container">
         {% block content %}
