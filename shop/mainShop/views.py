@@ -45,11 +45,6 @@ def get_shoes_queryset(query=None, id=int()):
     category = get_object_or_404(Category, id=id)
     shoes_set = Shoes.objects.filter(category=category).order_by('id')
 
-    sizes_list = []
-    for shoes in shoes_set:
-        sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
-        sizes_list.append(tuple(sizes))
-
     for q in queries:
         shoes = shoes_set.filter(
             category=category
@@ -64,6 +59,9 @@ def get_shoes_queryset(query=None, id=int()):
 
 
 def detailView(request, id):
+    category = get_object_or_404(Category, id=id)
+    shoes_set = Shoes.objects.filter(category=category).order_by('id')
+
     query = ""
     if request.GET:
         query = request.GET['q']

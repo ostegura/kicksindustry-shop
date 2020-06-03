@@ -206,14 +206,14 @@
 
 	    	{% if shoes.discount == True %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-danger text-dark" style="font-size: 19px; font-style: italic;"><s><b>Цена:</b> {{ shoes.price }}</s> </span></p>
+		    		<p><span class="alert alert-danger text-dark" style="font-size: 19px; font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} грн.</s> </span></p>
 		    	</div>
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }}</span></p>
+		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
 		    	</div>	
 		    {% else %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }}</span></p>
+		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
 		    	</div>
 	    	{% endif %}
 

@@ -23,30 +23,34 @@
 		<div class="row">
 			{% for shoes in category %}
 				<div class="card col-md-4 mx-auto shadow" style="width: 16rem; height: auto; margin-top: 10px;">
-				  <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 250px; margin-top: 10px;"></a>
+				  <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 240px; margin-top: 10px;"></a>
 				  <div class="card-body">
-				    <h5 class="card-title mb-3" style="text-align: center; margin: auto;">{{ shoes.name }} {{ shoes.model }}</h5>
-				    <p class="card-text text-left">{{ shoes.description }}</p>
+				    <h5 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.name }} {{ shoes.model }}</b></h5>
+
+				    {% if shoes.is_active == True %}
+					    <p class="card-text text-center"><span class="text-success"><b>В наличии</b></span></p>
+			    	{% else %}
+					    <p class="card-text text-center"><span class="text-danger"><b>Нет в наличии</b></span></p>
+			    	{% endif %}
 
 					{% if shoes.discount == True %}
 				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-danger text-dark" style="font-style: italic;"><s><b>Цена:</b> {{ shoes.price }}</s> </span></p>
+				    		<p><span class="alert alert-danger text-dark" style="font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} грн.</s> </span></p>
 				    	</div>
 				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><bЦена:</b> {{ shoes.price_after_discount }}</span></p>
-				    	</div>	
+				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
+				    	</div>
 				    {% else %}
 				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price }}</span></p>
+				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
 				    	</div>
 			    	{% endif %}
 
-			    	<div class="container justify-content-bottom">
-					    <div class="d-flex justify-content-center">
-					    	<a href="{% url 'mainShop:shoes' shoes.slug %}" class="btn btn-primary">Перейти</a>
-					    </div>
+				    <div class="card-footer d-flex justify-content-bottom">
+    				    <div class="mx-auto">
+    				    	<a href="{% url 'mainShop:shoes' shoes.slug %}" class="btn btn-primary">Перейти</a>
+    				    </div>
 				    </div>
-
 				  </div>
 				</div>
 			{% endfor %}
@@ -57,8 +61,8 @@
 		<div class="row">
 			<div class="card mx-auto">
 				<div class="card-body mt-2 mb-2">
-					<h2 class="card-title">No results.</h2>
-					<p class="card-text">There were no results matching your search: "{{query}}".</p>
+					<h2 class="card-title">Нет результатов.</h2>
+					<p class="card-text">Нет результатов поиска подходящих вашему запросу: "{{query}}".</p>
 				</div>
 			</div>
 		</div>
@@ -68,7 +72,7 @@
 <br>
 <div class="container d-flex justify-content-center" style="font-family: sans-serif;">
 	  <ul class="pagination">
-	  	
+
 	    {% if category.has_previous %}
 	      <li><a href="?page={{ category.previous_page_number }}" class="btn btn-primary">&laquo;</a></li>
 	    {% else %}
@@ -91,8 +95,3 @@
 	  </ul>
 </div>
 {% endblock content %}
-
-
-<script type="text/javascript">
-	document.getElementById("id_q").value = "{{query}}";
-</script>

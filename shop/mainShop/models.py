@@ -16,8 +16,8 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        verbose_name = 'Бренд'
-        verbose_name_plural = 'Бренды'
+        verbose_name = '.Бренд'
+        verbose_name_plural = '.Бренды'
 
     def __str__(self):
         return f'{self.name} {self.sex}'
@@ -33,9 +33,9 @@ class Shoes(models.Model):
     articul = models.CharField(max_length=64, default='')
     name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
-    price = models.CharField(max_length=64, default='1$')
+    price = models.FloatField(default='1.0')
     discount = models.BooleanField(default=False)
-    price_after_discount = models.CharField(max_length=64, default='0$', blank=True)
+    price_after_discount = models.FloatField(default='0.0', blank=True)
     description = models.TextField(default='')
     is_active = models.BooleanField()
     quantity = models.PositiveIntegerField(default=0)
@@ -62,11 +62,11 @@ class ShoesGallery(models.Model):
                                  on_delete=models.CASCADE,)
 
     class Meta:
-        verbose_name = 'Галерея'
-        verbose_name_plural = 'Галереи'
+        verbose_name = '.Галерея'
+        verbose_name_plural = '.Галереи'
 
     def __str__(self):
-        return f'{self.shoes.model}'
+        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.name}  {self.shoes.model}'
 
 
 class ShoesImage(models.Model):
@@ -76,11 +76,11 @@ class ShoesImage(models.Model):
                               default='noimage.jpg')
 
     class Meta:
-        verbose_name = "Фото обуви"
-        verbose_name_plural = "Фото обуви"
+        verbose_name = "Фото"
+        verbose_name_plural = "Фото"
 
     def __str__(self):
-        return f'{self.shoes_gallery.shoes.name} {self.shoes_gallery.shoes.model}'
+        return f'Артикул: {self.shoes_gallery.shoes.articul}, пара:{self.shoes_gallery.shoes.name} {self.shoes_gallery.shoes.model}'
 
 
 """ End of gallery """
@@ -94,23 +94,23 @@ class ModelSizeList(models.Model):
                                  on_delete=models.CASCADE,)
 
     class Meta:
-        verbose_name = 'Ключ на размеры для модели'
-        verbose_name_plural = 'Ключ на размеры для модели'
+        verbose_name = '.Размеры'
+        verbose_name_plural = '.Размеры'
 
     def __str__(self):
-        return f'{self.shoes.name}  {self.shoes.model}'
+        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.name}  {self.shoes.model}'
 
 
 class ShoesSize(models.Model):
     shoes_size = models.ForeignKey(ModelSizeList, on_delete=models.CASCADE)
-    model_size = models.CharField(max_length=2, default='36')
+    model_size = models.CharField(max_length=2, default='')
 
     class Meta:
-        verbose_name = "Доступные размеры"
-        verbose_name_plural = "Доступные размеры"
+        verbose_name = "Размер"
+        verbose_name_plural = "Размер"
 
     def __str__(self):
-        return f'Articul: {self.shoes_size.shoes.articul}, Size: {self.model_size}, Shoes: {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
+        return f'Артикул: {self.shoes_size.shoes.articul}, размер: {self.model_size}, пара: {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
 
 
 """ End of model size list """
