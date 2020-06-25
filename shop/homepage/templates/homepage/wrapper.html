@@ -4,61 +4,59 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Only Hipsters</title>
+      <title>Kicks Industry</title>
       {% load static %}
+
+      <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/images/apple-touch-icon.png' %}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/images/favicon-32x32.png' %}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{% static 'homepage/images/favicon-16x16.png' %}">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/wrapper.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/welcome_text.css' %}">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
       <script src="{% static 'js/banner.js' %}"></script>
   </head>
   <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="font-size: 18px; font-weight: bold;">
-        <div class="container">
-          <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
-            <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="height: 50px; width: 100px;">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
-            <ul class="nav nav-pills justify-content-center">
-              <li class="nav-item">
-                <a class="nav-link active" href="{% url 'homepage:index' %}">Homepage</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'mainShop:menu' %}">Catalogue</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'mainShop:male' %}">For men</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'mainShop:female' %}">For women</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact:members' %}">Team members</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact:contacts' %}">Contact us</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="font-size: 18px; font-weight: bold;">
+      <div class="container">
+        <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
+          <img src="{% static 'homepage/images/logo.png' %}" alt="" style="height: 50px; width: 100px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" style="font-family: sans-serif;">
+          <ul class="nav nav-pills justify-content-around">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'homepage:index' %}">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:men' %}">Мужская обувь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:women' %}">Женская обувь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact:contacts' %}">Обратная связь</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     {% block carousele %}
     {% endblock%}
 
     <div class="container">
         {% block content %}
-        {% endblock %}    
+        {% endblock %}
     </div>
 
     <hr>
@@ -75,11 +73,9 @@
           <div class="col-md-4 mx-auto">
             <!-- Content -->
             <h4 class="font-weight-bold text-uppercase mt-3 mb-4" style="font-style: italic;">Kicks Industry</h4>
-            <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-            consectetur
-            adipisicing elit. Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-            consectetur
-            adipisicing elit. Here you can use rows.</p>
+            <p>Можете быть уверены в качестве и оригинальности наших кроссовок.
+            Мы всегда рады помочь клиенту подобрать пару, которая будет идеально сидеть на ноге и дополнять образ.
+            С каждой покупкой вы получите скидочную карту на следующую покупку!</p>
           </div>
           <!-- Grid column -->
 
@@ -87,14 +83,14 @@
           <div class="col-md-2 mx-auto">
               <!-- Links -->
               <div class="d-flex justify-content-center">
-                <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="width: 80px; height: 40px;">
+                <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="width: 80px; height: 40px; margin-bottom: 5px;">
               </div>
 
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="{% url 'homepage:index' %}">Homepage</a></li>
-                <li class="list-group-item"><a href="{% url 'mainShop:menu' %}">Catalogue</a></li>
-                <li class="list-group-item"><a href="{% url 'contact:contacts' %}">Contact us</a></li>
-                <li class="list-group-item"><a href="{% url 'contact:members' %}">Team</a></li>
+                <li class="list-group-item"><a href="{% url 'homepage:index' %}">Главная</a></li>
+                <li class="list-group-item"><a href="{% url 'mainShop:men' %}">Мужская обувь</a></li>
+                <li class="list-group-item"><a href="{% url 'mainShop:women' %}">Женская обувь</a></li>
+                <li class="list-group-item"><a href="{% url 'contact:contacts' %}">Обратная связь</a></li>
               </ul>
           </div>
 
@@ -111,6 +107,6 @@
 
     </footer>
       <!-- Footer -->
-    
+
   </body>
 </html>

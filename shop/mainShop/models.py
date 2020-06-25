@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.urls import reverse
+from autoslug import AutoSlugField
 
 # Create your models here.
 
@@ -13,7 +14,8 @@ class Category(models.Model):
     size_table = models.ImageField(upload_to='size_table', validators=[
         FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],
         default='noimage.jpg')
-    slug = models.SlugField(unique=True)
+    # slug = models.SlugField(unique=True)
+    slug = AutoSlugField(populate_from='name', unique=True)
 
     class Meta:
         verbose_name = '.Бренд'
@@ -31,7 +33,6 @@ class Shoes(models.Model):
     image = models.ImageField(upload_to='shoes', validators=[
                               FileExtensionValidator(allowed_extensions=['svg', 'png', 'jpg', 'jpeg', 'webp'])],)
     articul = models.CharField(max_length=64, default='')
-    name = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     price = models.FloatField(default='1.0')
     discount = models.BooleanField(default=False)
@@ -41,11 +42,12 @@ class Shoes(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     sale_cnt = models.PositiveIntegerField(default=0)
     add_date = models.DateTimeField(verbose_name='added date', auto_now=True)
-    slug = models.SlugField(unique=True)
+    # slug = models.SlugField(unique=True)
+    slug = AutoSlugField(populate_from='model', unique=True)
 
     class Meta:
-        verbose_name = 'Модель'
-        verbose_name_plural = 'Модель'
+        verbose_name = '.Модель'
+        verbose_name_plural = '.Модель'
 
     def __str__(self):
         return self.model
@@ -66,7 +68,7 @@ class ShoesGallery(models.Model):
         verbose_name_plural = '.Галереи'
 
     def __str__(self):
-        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.name}  {self.shoes.model}'
+        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.category.name}  {self.shoes.model}'
 
 
 class ShoesImage(models.Model):
@@ -80,7 +82,7 @@ class ShoesImage(models.Model):
         verbose_name_plural = "Фото"
 
     def __str__(self):
-        return f'Артикул: {self.shoes_gallery.shoes.articul}, пара:{self.shoes_gallery.shoes.name} {self.shoes_gallery.shoes.model}'
+        return f'Артикул: {self.shoes_gallery.shoes.articul}, пара:{self.shoes_gallery.shoes.category.name} {self.shoes_gallery.shoes.model}'
 
 
 """ End of gallery """
@@ -98,19 +100,19 @@ class ModelSizeList(models.Model):
         verbose_name_plural = '.Размеры'
 
     def __str__(self):
-        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.name}  {self.shoes.model}'
+        return f'Артикул: {self.shoes.articul}, пара: {self.shoes.category.name}  {self.shoes.model}'
 
 
 class ShoesSize(models.Model):
     shoes_size = models.ForeignKey(ModelSizeList, on_delete=models.CASCADE)
-    model_size = models.CharField(max_length=2, default='')
+    model_size = models.CharField(max_length=10, default='')
 
     class Meta:
         verbose_name = "Размер"
         verbose_name_plural = "Размер"
 
     def __str__(self):
-        return f'Артикул: {self.shoes_size.shoes.articul}, размер: {self.model_size}, пара: {self.shoes_size.shoes.name} {self.shoes_size.shoes.model}'
+        return f'Артикул: {self.shoes_size.shoes.articul}, размер: {self.model_size}, пара: {self.shoes_size.shoes.category.name} {self.shoes_size.shoes.model}'
 
 
 """ End of model size list """

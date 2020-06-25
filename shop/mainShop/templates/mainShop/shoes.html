@@ -5,30 +5,30 @@
 
 <link rel="stylesheet" type="text/css" href="{% static "css/shoes.css" %}">
 
+
 {% block content %}
-	<div class="card mb-1 shadow" style="margin-top: 10px; font-family: sans-serif;">
+	<div class="card lg-1 shadow-lg" style="margin-top: 10px; font-family: sans-serif;">
 
 		<div class="container">
 			<div class="row justify-content-md-center">
 			    {% for img in images %}
 			  	    <div class="col col-md-2">
-
 						<a data-toggle="modal" data-target="#image{{ forloop.counter }}">
-						  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle" src="{{ img.image.url }}" alt="{{ shoes.name }}" style="margin-top: 10px;">
-						</a> 
-					
+						  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom" src="{{ img.image.url }}" alt="{{ shoes.category.name }}" style="margin-top: 10px;">
+						</a>
+
 						<!-- Modal -->
 						<div class="modal fade" id="image{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						  <div class="modal-dialog modal-lg" role="document">
 						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h6 class="modal-title" id="exampleModalLongTitle">{{ shoes.name }} {{ shoes.model }}</h6>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
 						      <div class="modal-body">
-						        <img class="img-fluid card-img-top rounded d-block" src="{{ img.image.url }}" alt="{{ shoes.name }}">
+
+    					      	<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+					                <span aria-hidden="true">&times;</span>
+					            </button>
+					      	    <h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
+
+						        <img class="img-fluid card-img-top rounded d-block" src="{{ img.image.url }}" alt="{{ shoes.category.name }}">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -42,24 +42,24 @@
 
 				<div class="container d-flex justify-content-center">
 					<a class="btn btn-link" data-toggle="modal" data-target="#core-image-zoom">
-					  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle border border-left-0 border-right-0" src="{{ shoes.image.url }}" alt="{{ shoes.name }}" style="width: 400px; margin-top: 10px;">
-					</a> 
-				
+					  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom border border-left-0 border-right-0" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }}" style="width: 400px; margin-top: 10px;">
+					</a>
+
 					<!-- Modal -->
 					<div class="modal fade" id="core-image-zoom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-lg" role="document">
 					    <div class="modal-content">
-					      <div class="modal-body">
-
-					      	<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+					      <div class="modal-header">
+					        <h6 class="modal-title" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
-					      	<h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.name }} {{ shoes.model }}</h6>
-
-					        <img class="img-fluid card-img-top rounded d-block" src="{{ shoes.image.url }}" alt="{{ shoes.name }}">
+					      </div>
+					      <div class="modal-body">
+					        <img class="img-fluid card-img-top rounded d-block" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }}">
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary " data-dismiss="modal">Закрыть</button>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
 					      </div>
 					    </div>
 					  </div>
@@ -69,9 +69,10 @@
 			</div>
 		</div>
 
-	  <div class="card-body" style="text-align: center; margin: auto;">
-		<h5 class="card-title text-dark">{{ shoes.name }} {{ shoes.model }}</h5>
-		
+	  <div class="card-body text-center mx-auto">
+		<h5 class="card-title text-dark">{{ shoes.category.name }} {{ shoes.model }}</h5>
+		<h6 class="card-title text-dark">Артикул: {{ shoes.articul }}</h6>
+
 		<p class="card-text">
 			<div class="d-flex justify-content-center">
 				{% if shoes.is_active == True %}
@@ -89,7 +90,7 @@
 	    <p class="card-text">
 	        <div class="form-group d-flex justify-content-center">
 	            <label for="size"><b>Размеры:</b></label>
-	    	    <select class="form-control" style="width: auto;" id="size">
+	    	    <select class="form-control align-top" style="width: auto;" id="size">
 		    	    {% for size in sizes %}
 	    			    <option value="{{ size.model_size }}"> {{ size.model_size }} </option>
 		    	    {% endfor %}
@@ -98,7 +99,7 @@
 	    </p>
 	    <p class="card-text"><b>Описание:</b> {{ shoes.description }}</p>
 
-        <div id="accordion">
+        <div id="accordion" class="mw-100">
 		  <div class="card">
 		    <div class="card-header" id="headingOne">
 		      <h5 class="mb-0">
@@ -110,11 +111,10 @@
 
 		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 		      <div class="card-body">
-
-	    		<a class="btn btn-link" data-toggle="modal" data-target="#size-table-zoom">
+		        <a class="btn btn-link" data-toggle="modal" data-target="#size-table-zoom">
 				  	<img class="img-fluid rounded mx-auto d-block" src="{{ size_table.url }}" alt="{{ shoes.name }}" style="margin-top: 10px;">
-				</a> 
-			
+				</a>
+
 				<!-- Modal -->
 				<div class="modal fade" id="size-table-zoom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -124,9 +124,9 @@
 				      	<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
-				      	<h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.name }} {{ shoes.model }}</h6>
+				      	<h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
 
-				        <img class="img-fluid card-img-top rounded d-block" src="{{ size_table.url }}" alt="{{ shoes.name }}">
+				        <img class="img-fluid card-img-top rounded d-block" src="{{ size_table.url }}" alt="{{ shoes.category.name }}">
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -200,9 +200,10 @@
 		   </div>
 
 		  </div>
+		  
 		</div>
 
-	    <div class="card-footer" style="margin: auto;">	    	
+	    <div class="card-footer" style="margin: auto;">
 
 	    	{% if shoes.discount == True %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
@@ -210,14 +211,12 @@
 		    	</div>
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
 		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
-		    	</div>	
+		    	</div>
 		    {% else %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
 		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
 		    	</div>
 	    	{% endif %}
-
-	    	
 
 	    	<div class="d-flex justify-content-center" style="margin-top: 10px;">
 				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">
@@ -230,9 +229,3 @@
 	</div>
 
 {% endblock content %}
-
-<script type="text/javascript">
-$('*').on('shown.bs.modal', function () {
- 	$('#myInput').trigger('focus')
-})
-</script>

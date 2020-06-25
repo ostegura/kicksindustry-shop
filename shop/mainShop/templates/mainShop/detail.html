@@ -25,7 +25,7 @@
 				<div class="card col-md-4 mx-auto shadow" style="width: 16rem; height: auto; margin-top: 10px;">
 				  <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 240px; margin-top: 10px;"></a>
 				  <div class="card-body">
-				    <h5 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.name }} {{ shoes.model }}</b></h5>
+				    <h5 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.category.name }} {{ shoes.model }}</b></h5>
 
 				    {% if shoes.is_active == True %}
 					    <p class="card-text text-center"><span class="text-success"><b>В наличии</b></span></p>
@@ -46,7 +46,7 @@
 				    	</div>
 			    	{% endif %}
 
-				    <div class="card-footer d-flex justify-content-bottom">
+                    <div class="card-footer d-flex justify-content-bottom">
     				    <div class="mx-auto">
     				    	<a href="{% url 'mainShop:shoes' shoes.slug %}" class="btn btn-primary">Перейти</a>
     				    </div>

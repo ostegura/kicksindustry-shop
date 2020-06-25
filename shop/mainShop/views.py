@@ -9,13 +9,13 @@ import operator
 from mainShop.models import *
 
 
-class MenuView(generic.ListView):
-    template_name = 'mainShop/menu.html'
-    context_object_name = 'menu_list'
-    paginate_by = 12
+# class MenuView(generic.ListView):
+#     template_name = 'mainShop/menu.html'
+#     context_object_name = 'menu_list'
+#     paginate_by = 12
 
-    def get_queryset(self):
-        return Category.objects.all().order_by("name")
+#     def get_queryset(self):
+#         return Category.objects.all().order_by("name")
 
 
 class MaleListView(generic.ListView):
@@ -24,7 +24,7 @@ class MaleListView(generic.ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return Category.objects.filter(sex='male').order_by("name")
+        return Category.objects.filter(sex='men').order_by("name")
 
 
 class FemaleListView(generic.ListView):
@@ -33,7 +33,7 @@ class FemaleListView(generic.ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return Category.objects.filter(sex='female').order_by("name")
+        return Category.objects.filter(sex='women').order_by("name")
 
 # start of menu detail view (example: nike (male) -> nike shoes)
 
@@ -49,7 +49,7 @@ def get_shoes_queryset(query=None, id=int()):
         shoes = shoes_set.filter(
             category=category
         ).filter(
-            Q(name__icontains=q) | Q(model__icontains=q) | Q(description__icontains=q)
+            Q(category__name__icontains=q) | Q(model__icontains=q) | Q(description__icontains=q)
         ).distinct()
 
         for pair in shoes:
@@ -67,7 +67,7 @@ def detailView(request, id):
         query = request.GET['q']
 
     shoes_set = sorted(get_shoes_queryset(query, id),
-                       key=operator.attrgetter('name'))
+                       key=operator.attrgetter('category.name'))
 
     page = request.GET.get('page', 1)
 
