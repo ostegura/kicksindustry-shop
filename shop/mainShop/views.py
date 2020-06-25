@@ -63,15 +63,19 @@ def detailView(request, id):
     shoes_set = Shoes.objects.filter(category=category).order_by('id')
 
     query = ""
-    if request.GET:
+
+    if 'q' in request.GET:
         query = request.GET['q']
+    else:
+        query = ""
 
     shoes_set = sorted(get_shoes_queryset(query, id),
                        key=operator.attrgetter('category.name'))
 
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(shoes_set, 10)
+    # number of pages below
+    paginator = Paginator(shoes_set, 12)
     try:
         shoes_list = paginator.page(page)
     except PageNotAnInteger:
@@ -79,8 +83,10 @@ def detailView(request, id):
     except EmptyPage:
         shoes_list = paginator.page(paginator.num_pages)
 
+    # return render(request, 'mainShop/detail.html', {'category': shoes_list,
+    #                                                 'query': str(query)})
     return render(request, 'mainShop/detail.html', {'category': shoes_list,
-                                                    'query': str(query)})
+                                                    })
 
 
 # end of menu detail view (example: nike (male) -> nike shoes)
