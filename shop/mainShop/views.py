@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from .filters import ShoesFilter
 
 import operator
 # from django.shortcuts import redirect
@@ -9,22 +10,16 @@ import operator
 from mainShop.models import *
 
 
-# class MenuView(generic.ListView):
-#     template_name = 'mainShop/menu.html'
-#     context_object_name = 'menu_list'
-#     paginate_by = 12
-
-#     def get_queryset(self):
-#         return Category.objects.all().order_by("name")
-
-
 class MaleListView(generic.ListView):
+    model = Shoes
     template_name = 'mainShop/male.html'
-    context_object_name = 'male_list'
     paginate_by = 12
 
-    def get_queryset(self):
-        return Category.objects.filter(sex='men').order_by("name")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['male_list'] = Category.objects.filter(sex='men').order_by("name")
+        context['filter'] = ShoesFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class FemaleListView(generic.ListView):
@@ -34,6 +29,7 @@ class FemaleListView(generic.ListView):
 
     def get_queryset(self):
         return Category.objects.filter(sex='women').order_by("name")
+
 
 # start of menu detail view (example: nike (male) -> nike shoes)
 
@@ -62,6 +58,8 @@ def detailView(request, id):
     category = get_object_or_404(Category, id=id)
     shoes_set = Shoes.objects.filter(category=category).order_by('id')
 
+    shoes_filter = ShoesFilter(request.GET, queryset=shoes_set)
+
     query = ""
 
     if 'q' in request.GET:
@@ -85,7 +83,7 @@ def detailView(request, id):
 
     # return render(request, 'mainShop/detail.html', {'category': shoes_list,
     #                                                 'query': str(query)})
-    return render(request, 'mainShop/detail.html', {'category': shoes_list,
+    return render(request, 'mainShop/detail.html', {'category': shoes_list, 'filter': shoes_filter,
                                                     })
 
 
@@ -94,7 +92,7 @@ def detailView(request, id):
 def shoes_detail_view(request, slug):
     shoes = get_object_or_404(Shoes, slug=slug)
     images = ShoesImage.objects.filter(shoes_gallery__shoes=shoes)
-    sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
+    sizes = ShoesSize.objects.filter(shoes_size__shoes=shoes).exclude(is_active=False).order_by("model_size")
     size_table = shoes.category.size_table
     return render(request, 'mainShop/shoes.html', {'shoes': shoes,
                                                    'images': images,

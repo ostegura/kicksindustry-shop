@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'homepage',
     'contact',
     'userOrder',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

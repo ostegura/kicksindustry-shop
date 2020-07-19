@@ -31,16 +31,16 @@ def UserOrderView(request, id):
                                      address=address,
                                      phone_no=phone,
                                      email=from_email,
-                                     shoes_name=shoes.name,
+                                     shoes_name=shoes.category.name,
                                      model=shoes.model,
                                      size=size
                                      )
             # print('5')
             try:
-                send_mail(f'{shoes.name} {shoes.model}',
+                send_mail(f'{shoes.category.name} {shoes.model}',
                           f'\
                             Client: {name} {surname};\n \
-                            Product: {shoes.name} {shoes.model} - {size};\n \
+                            Product: {shoes.category.name} {shoes.model} - {size};\n \
                             Address: {address};\n \
                             E-mail: {from_email};\n \
                             Phone: {phone}',

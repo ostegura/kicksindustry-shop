@@ -20,7 +20,7 @@ class UserOrder(models.Model):
     shoes_name = models.CharField(
         max_length=64, default='Shoes name')
     model = models.CharField(max_length=128)
-    size = models.CharField(max_length=2, default='')
+    size = models.CharField(max_length=10, default='')
     time = models.DateTimeField(verbose_name='order time', auto_now=True)
     mod_check = models.BooleanField(default=False)
 

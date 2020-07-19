@@ -6,14 +6,14 @@
 
 <div class="container text-center" style="font-family: sans-serif;">
   <h1 class="display-3">Спасибо!</h1>
-  <p class="lead">Вы <strong>успешно</strong> оформили заказ на <strong>{{ shoes.name }} {{ shoes.model }} - размер {{ size }}</strong>.</p>
+  <p class="lead">Вы <strong>успешно</strong> оформили заказ на <strong>{{ shoes.category.name }} {{ shoes.model }} - размер {{ size }}</strong>.</p>
   <hr>
   <p>
     Есть вопросы? <a href="{% url 'contact:contacts' %}">Пишите!</a>
   </p>
-  <p class="lead">
+  <!-- <p class="lead">
     <a class="btn btn-primary btn-sm" href="{% url 'mainShop:menu' %}" role="button">Вернуться в каталог</a>
-  </p>
+  </p> -->
 </div>
 
 {% endblock content %}

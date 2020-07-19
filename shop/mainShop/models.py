@@ -25,7 +25,7 @@ class Category(models.Model):
         return f'{self.name} {self.sex}'
 
     def get_absolute_url(self):
-        return reverse('category-detail', kwargs={'slug': self.slug})
+        return reverse('category-detail', kwargs={'id': self.id})
 
 
 class Shoes(models.Model):
@@ -106,6 +106,7 @@ class ModelSizeList(models.Model):
 class ShoesSize(models.Model):
     shoes_size = models.ForeignKey(ModelSizeList, on_delete=models.CASCADE)
     model_size = models.CharField(max_length=10, default='')
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Размер"
