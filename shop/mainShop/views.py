@@ -18,7 +18,7 @@ class MaleListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['male_list'] = Category.objects.filter(sex='men').order_by("name")
-        context['filter'] = ShoesFilter(self.request.GET, queryset=self.get_queryset())
+        # context['filter'] = ShoesFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
 

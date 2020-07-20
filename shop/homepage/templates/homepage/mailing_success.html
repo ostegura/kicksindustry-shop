@@ -1,0 +1,18 @@
+{% extends "homepage/wrapper.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container text-center" style="font-family: sans-serif;">
+  <h1 class="display-4">Спасибо за подписку!</h1>
+  <hr>
+  <p>
+    Есть вопросы? <a href="{% url 'contact:contacts' %}">Пишите!</a>
+  </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" href="{% url 'homepage:index' %}" role="button">Вернуться на главную</a>
+    </p>
+</div>
+
+{% endblock content %}

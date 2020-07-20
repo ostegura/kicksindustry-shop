@@ -2,5 +2,5 @@ from django import forms
 
 
 class GetUserContactForm(forms.Form):
-    user_email = forms.EmailField(required=True)
-    user_name = forms.CharField(required=True)
+    name = forms.CharField(required=True, max_length=64)
+    email = forms.EmailField(required=True)
