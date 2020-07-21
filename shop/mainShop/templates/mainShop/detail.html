@@ -1,6 +1,7 @@
 {% extends "homepage/wrapper.html" %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 <link rel="stylesheet" type="text/css" href="{% static "mainShop/detail.css" %}">
 
@@ -18,21 +19,15 @@
 	</div>
 </div>
 
-<div class="container justify-content-center">
-	<form method="GET">
-{#		 {{ filter.form }} #}
-		{% for item in filter.form %}
-            {% if item.0 %}
-                <span>Цена от: </span>{{ item.0 }}
-            {% endif %}
-
-            {% if item.1 %}
-                <span>Цена до: </span>{{ item.1 }}
-            {% endif %}
-		{% endfor %}
-
-		<button type="submit" class="btn btn-primary ml-3">Search</button>
-	</form>
+<div class="container" style="margin-left: 35%;">
+    <div class="w-25">
+        <form method="GET">
+{#            {{ filter.form|crispy }}#}
+            {{ filter.form.price_gt|as_crispy_field }}
+            {{ filter.form.price_lt|as_crispy_field }}
+		    <button type="submit" class="btn btn-primary">Search</button>
+	    </form>
+    </div>
 </div>
 
 {% if category %}
