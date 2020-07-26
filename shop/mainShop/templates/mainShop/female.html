@@ -8,7 +8,7 @@
 	{% for pos in female_list %}
         {% if pos.shoes_set.count > 0 %}
             <div class="card mx-auto d-flex justify-content-center shadow-lg" style="margin-top: 25px; width: 16rem;">
-              <a href="{% url 'mainShop:detail' pos.id %}">
+              <a href="{% url 'mainShop:detail' pos.pk %}">
                 <img class="card-img-top img-fluid rounded mx-auto d-block" src="{{ pos.image.url }}" alt="{{ pos.name }}" style="width: 240px; height: 180px;">
               </a>
               <div class="card-body">
@@ -18,7 +18,7 @@
                     <h5 class="card-title mb-3 mx-auto text-center"><a class="text-dark" href="{% url 'mainShop:detail' pos.id %}" style="font-size: 18px;">Женские кроссовки {{ pos.name }}</a> <span class="badge badge-success">{{ pos.shoes_set.count }}</span></h5>
                 {% endif %}
                 <div class="card-footer d-flex justify-content-center">
-                    <a href="{% url 'mainShop:detail' pos.id %}" class="btn btn-primary bg-info text-white">Перейти</a>
+                    <a href="{% url 'mainShop:detail' pos.pk %}" class="btn btn-primary bg-info text-white">Перейти</a>
                 </div>
               </div>
             </div>

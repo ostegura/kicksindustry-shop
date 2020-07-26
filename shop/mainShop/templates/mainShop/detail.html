@@ -11,29 +11,62 @@
 	<div style="text-align: center;"><strong> {{ error_message }} </strong></div>
 {% endif %}
 
-<div class="container justify-content-center mt-3" style="width: 20rem;">
-	<div class="search-bar mt-2 mb-2">
-		<form method="get">
-			<input type="text" class="form-control" name="q" id="id_q" placeholder="Search...">
-		</form>
-	</div>
-</div>
-
-<div class="container" style="margin-left: 35%;">
-    <div class="w-25">
-        <form method="GET">
-{#            {{ filter.form|crispy }}#}
-            {{ filter.form.price_gt|as_crispy_field }}
-            {{ filter.form.price_lt|as_crispy_field }}
-		    <button type="submit" class="btn btn-primary">Search</button>
-	    </form>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <form method="GET">
+                <div class="form-group">
+                    {{ filter.form.model|as_crispy_field }}
+                </div>
+{#                    <div class="form-group">#}
+{#                        <button type="submit" class="btn btn-secondary btn-sm ml-1 mt-1">Применить</button>#}
+{#                    </div>#}
+            </form>
+        </div>
     </div>
-</div>
 
-{% if category %}
+<!-- Button trigger modal -->
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+
+            <button type="button" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+            Фильтры
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Фильтры</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="GET">
+                                <div class="form-group">
+                                    {{ filter.form.model|as_crispy_field }}
+                                    {{ filter.form.price__gt|as_crispy_field }}
+                                    {{ filter.form.price__lt|as_crispy_field }}
+                                    {{ filter.form.ordering|as_crispy_field }}
+                                    <div class="row justify-content-center align-items-center">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% if object_list %}
 	<div class="container" style="font-family: sans-serif;">
 		<div class="row">
-			{% for shoes in filter.qs %}
+			{% for shoes in object_list %}
 				<div class="card col-md-3 mx-auto shadow" style="width: 16rem; height: auto; margin-top: 10px;">
                     <div class="container" style="height: 210px;">
                         <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 210px; height: auto; margin-top: 10px;"></a>
@@ -79,7 +112,7 @@
 			<div class="card mx-auto">
 				<div class="card-body mt-2 mb-2">
 					<h2 class="card-title">Нет результатов.</h2>
-					<p class="card-text">Нет результатов поиска подходящих вашему запросу: "{{query}}".</p>
+					<p class="card-text">Нет результатов поиска подходящих вашему запросу.</p>
 				</div>
 			</div>
 		</div>
@@ -90,23 +123,22 @@
 <div class="container d-flex justify-content-center" style="font-family: sans-serif;">
 	<nav>
 	  <ul class="pagination">
-
-	    {% if category.has_previous %}
-	      <li class="page-item"><a href="?page={{ category.previous_page_number }}" class="btn btn-primary page-link">&laquo;</a></li>
+	    {% if page_obj.has_previous %}
+	      <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary page-link">&laquo;</a></li>
 	    {% else %}
 	      <li class="disabled btn btn-primary page-item"><span>&laquo;</span></li>
 	    {% endif %}
 
-	    {% for i in category.paginator.page_range %}
-	      {% if category.number == i %}
+	    {% for i in page_obj.paginator.page_range %}
+	      {% if page_obj.number == i %}
 	        <li class="active page-item"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
 	      {% else %}
 	        <li class="page-item"><a href="?page={{ i }}" class="btn btn-primary page-link">{{ i }}</a></li>
 	      {% endif %}
 	    {% endfor %}
 
-	    {% if category.has_next %}
-	      <li class="page-item"><a href="?page={{ category.next_page_number }}" class="btn btn-primary page-link">&raquo;</a></li>
+	    {% if page_obj.has_next %}
+	      <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary page-link">&raquo;</a></li>
 	    {% else %}
 	      <li class="disabled btn btn-primary page-item"><span>&raquo;</span></li>
 	    {% endif %}

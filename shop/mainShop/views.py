@@ -1,13 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
+from django_filters.views import FilterView
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.db.models import Q
+
 from .filters import ShoesFilter
-
-import operator
-# from django.shortcuts import redirect
-
-from mainShop.models import *
+from .models import *
 
 
 class MaleListView(generic.ListView):
@@ -18,73 +16,32 @@ class MaleListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['male_list'] = Category.objects.filter(sex='men').order_by("name")
-        # context['filter'] = ShoesFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
 
 class FemaleListView(generic.ListView):
+    model = Shoes
     template_name = 'mainShop/female.html'
-    context_object_name = 'female_list'
     paginate_by = 12
 
-    def get_queryset(self):
-        return Category.objects.filter(sex='women').order_by("name")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['female_list'] = Category.objects.filter(sex='women').order_by("name")
+        return context
 
 
 # start of menu detail view (example: nike (male) -> nike shoes)
 
 
-def get_shoes_queryset(query=None, id=int()):
-    queryset = []
-    queries = query.split(" ")
+class ModelFilteredListView(FilterView):
+    filterset_class = ShoesFilter
+    template_name = 'mainShop/detail.html'
+    paginate_by = 24
+    ordering = 'id'
 
-    category = get_object_or_404(Category, id=id)
-    shoes_set = Shoes.objects.filter(category=category).order_by('id')
-
-    for q in queries:
-        shoes = shoes_set.filter(
-            category=category
-        ).filter(
-            Q(category__name__icontains=q) | Q(model__icontains=q) | Q(description__icontains=q)
-        ).distinct()
-
-        for pair in shoes:
-            queryset.append(pair)
-
-    return list(set(queryset))
-
-
-def detailView(request, id):
-    category = get_object_or_404(Category, id=id)
-    shoes_set = Shoes.objects.filter(category=category).order_by('id')
-
-    shoes_filter = ShoesFilter(request.GET, queryset=shoes_set)
-
-    query = ""
-
-    if 'q' in request.GET:
-        query = request.GET['q']
-    else:
-        query = ""
-
-    shoes_set = sorted(get_shoes_queryset(query, id),
-                       key=operator.attrgetter('category.name'))
-
-    page = request.GET.get('page', 1)
-
-    # number of pages below
-    paginator = Paginator(shoes_set, 12)
-    try:
-        shoes_list = paginator.page(page)
-    except PageNotAnInteger:
-        shoes_list = paginator.page(1)
-    except EmptyPage:
-        shoes_list = paginator.page(paginator.num_pages)
-
-    # return render(request, 'mainShop/detail.html', {'category': shoes_list,
-    #                                                 'query': str(query)})
-    return render(request, 'mainShop/detail.html', {'category': shoes_list, 'filter': shoes_filter,
-                                                    })
+    def get_queryset(self):
+        category = get_object_or_404(Category, id=self.kwargs['pk'])
+        return Shoes.objects.filter(category=category)
 
 
 # end of menu detail view (example: nike (male) -> nike shoes)
