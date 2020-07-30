@@ -3,7 +3,8 @@ import django_filters
 from .models import Shoes, ShoesSize, Category
 from django.forms.widgets import TextInput
 
-# def shoes_queryset(request):
+
+# def get_shoesSize_qs(request):
 #     return ShoesSize.objects.all()
 
 
@@ -18,7 +19,8 @@ class ShoesFilter(django_filters.FilterSet):
     price__lt = django_filters.NumberFilter(label='Цена до:', field_name='price', lookup_expr='lte')
     model = django_filters.CharFilter(label='', field_name='model', lookup_expr='icontains', widget=TextInput(attrs={'placeholder': 'Поиск..'}))
 
-    # shoes = django_filters.ModelChoiceFilter(queryset=shoes_queryset, label='')
+    # shoes = django_filters.ModelMultipleChoiceFilter(queryset=get_shoesSize_qs, label='', field_name='model_size')
+    shoes = django_filters.CharFilter(label='Size', field_name='model_size', lookup_expr='icontains')
 
     ordering = django_filters.ChoiceFilter(label='Сортировать по:', choices=CHOICES, method='filter_by_price')
 
@@ -39,15 +41,17 @@ class ShoesFilter(django_filters.FilterSet):
             expression = '-sale_cnt'
         return queryset.order_by(expression)
 
+    def filter_by_size(self, queryset, name, value):
+        pass
 
 
 # # TODO add shoes size filter
 # class ShoesSizeFilter(django_filters.FilterSet):
 #
-#     size = django_filters.NumberFilter(label='Размер:', field_name='model_size', lookup_expr='icontains')
+#     # model_size = django_filters.ModelMultipleChoiceFilter(queryset=ShoesSize.objects.all(), field_name='model_size')
 #
 #     class Meta:
 #         model = ShoesSize
 #         fields = {
-#             'model_size': ['icontains']
+#             'model_size': ['icontains'],
 #         }

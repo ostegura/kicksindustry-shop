@@ -14,12 +14,9 @@
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <form method="GET">
-                <div class="form-group">
+                <div class="form-group mt-1">
                     {{ filter.form.model|as_crispy_field }}
                 </div>
-{#                    <div class="form-group">#}
-{#                        <button type="submit" class="btn btn-secondary btn-sm ml-1 mt-1">Применить</button>#}
-{#                    </div>#}
             </form>
         </div>
     </div>
@@ -28,7 +25,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center">
 
-            <button type="button" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-outline-primary font-weight-bold mb-2" data-toggle="modal" data-target="#exampleModalCenter">
             Фильтры
             </button>
 
@@ -49,6 +46,7 @@
                                     {{ filter.form.price__gt|as_crispy_field }}
                                     {{ filter.form.price__lt|as_crispy_field }}
                                     {{ filter.form.ordering|as_crispy_field }}
+{#                                    {{ filter.form|crispy }}#}
                                     <div class="row justify-content-center align-items-center">
                                         <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
                                     </div>
@@ -62,18 +60,17 @@
     </div>
 
 
-
 {% if object_list %}
 	<div class="container" style="font-family: sans-serif;">
 		<div class="row">
 			{% for shoes in object_list %}
-				<div class="card col-md-3 mx-auto shadow" style="width: 16rem; height: auto; margin-top: 10px;">
-                    <div class="container" style="height: 210px;">
-                        <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 210px; height: auto; margin-top: 10px;"></a>
+				<div class="card col-md-3 mx-auto shadow-lg" style="width: 16rem; height: auto; margin-top: 10px;">
+				     <div class="container" style="height: 200px;">
+                        <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 200px; margin-top: 10px;"></a>
                     </div>
 
 				  <div class="card-body">
-                    <div class="container" style="height: 40px;">
+				    <div class="container" style="height: 40px;">
                         <h6 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.category.name }} {{ shoes.model }}</b></h6>
                     </div>
 
@@ -84,14 +81,14 @@
 			    	{% endif %}
 
 					{% if shoes.discount == True %}
-				    	<div class="d-flex justify-content-center mw-100" style="margin-top: 15px;">
+				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
 				    		<p><span class="alert alert-danger text-dark" style="font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} грн.</s> </span></p>
 				    	</div>
-				    	<div class="d-flex justify-content-center mw-100" style="margin-top: 15px;">
+				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
 				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
 				    	</div>
 				    {% else %}
-				    	<div class="d-flex justify-content-center mw-100" style="margin-top: 15px;">
+				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
 				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
 				    	</div>
 			    	{% endif %}
@@ -121,26 +118,27 @@
 
 <br>
 <div class="container d-flex justify-content-center" style="font-family: sans-serif;">
-	<nav>
-	  <ul class="pagination">
+	<nav class="w-75 d-flex justify-content-center">
+	  <ul class="pagination pagination-sm">
+
 	    {% if page_obj.has_previous %}
-	      <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary page-link">&laquo;</a></li>
+	      <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a></li>
 	    {% else %}
-	      <li class="disabled btn btn-primary page-item"><span>&laquo;</span></li>
+	      <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
 	    {% endif %}
 
 	    {% for i in page_obj.paginator.page_range %}
 	      {% if page_obj.number == i %}
-	        <li class="active page-item"><span class="btn btn-success">{{ i }} <span class="sr-only">(current)</span></span></li>
+	        <li class="page-item disabled"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
 	      {% else %}
-	        <li class="page-item"><a href="?page={{ i }}" class="btn btn-primary page-link">{{ i }}</a></li>
+	        <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
 	      {% endif %}
 	    {% endfor %}
 
 	    {% if page_obj.has_next %}
-	      <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary page-link">&raquo;</a></li>
+	      <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
 	    {% else %}
-	      <li class="disabled btn btn-primary page-item"><span>&raquo;</span></li>
+	      <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
 	    {% endif %}
 	  </ul>
 	</nav>
