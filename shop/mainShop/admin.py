@@ -22,10 +22,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'sex',)
     search_fields = ['name', 'sex']
     list_filter = ['name', 'sex']
-    list_per_page = 30
-    inlines = [
-        ShoesInline,
-    ]
+    # list_per_page = 30
+    # inlines = [
+    #     ShoesInline,
+    # ]
 
 
 @admin.register(ShoesGallery)

@@ -37,23 +37,25 @@ def UserOrderView(request, id):
                                      )
             # print('5')
             try:
-                send_mail(f'{shoes.category.name} {shoes.model}',
-                          f'\
-                            Client: {name} {surname};\n \
-                            Product: {shoes.category.name} {shoes.model} - {size};\n \
-                            Address: {address};\n \
-                            E-mail: {from_email};\n \
-                            Phone: {phone}',
-                          from_email,
-                          ['stegura99@gmail.com'])
+                # send_mail(f'{shoes.category.name} {shoes.model}',
+                #           f'\
+                #             Client: {name} {surname};\n \
+                #             Product: {shoes.category.name} {shoes.model} - {size};\n \
+                #             Address: {address};\n \
+                #             E-mail: {from_email};\n \
+                #             Phone: {phone}',
+                #           from_email,
+                #           ['stegura99@gmail.com'])
+                shoes.sale_cnt += 1
+                shoes.save()
             except BadHeaderError:
-                return HttpResponse('Have some issues with sending email.')
+                return HttpResponse('Проблема с отправкой отчета о покупке.')
             return render(request, 'userOrder/success.html',
                           {'shoes': shoes,
                            'size': size})
         else:
             # print(user_order.errors)
-            error_message = 'Please, fill fields correctly!'
+            error_message = 'Пожалуйста, заполните поля правильно.'
             return render(request, 'userOrder/user_order.html',
                           {'form': user_order,
                            'error': error_message,

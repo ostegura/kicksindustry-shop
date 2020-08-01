@@ -219,10 +219,11 @@
 	    	{% endif %}
 
 	    	<div class="d-flex justify-content-center" style="margin-top: 10px;">
-				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">
-		    		{% csrf_token %}
-		    		<input class="btn btn-primary bg-info text-white" type="submit" value="Оформить">
-				</form>
+{#				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">#}
+{#		    		{% csrf_token %}#}
+{#		    		<input class="btn btn-primary bg-info text-white" type="submit" value="Оформить">#}
+{#				</form>#}
+                <a href="{% url 'userOrder:order' shoes.id %}" class="btn btn-primary">Оформить</a>
 	    	</div>
 	    </div>
 	  </div>

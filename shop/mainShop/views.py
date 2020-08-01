@@ -40,7 +40,7 @@ class ModelFilteredListView(FilterView):
     ordering = 'id'
 
     def get_queryset(self):
-        category = get_object_or_404(Category, id=self.kwargs['pk'])
+        category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Shoes.objects.filter(category=category)
 
 
@@ -55,16 +55,3 @@ def shoes_detail_view(request, slug):
                                                    'images': images,
                                                    'sizes': sizes,
                                                    'size_table': size_table})
-
-
-def buy(request, shoes_id):
-    try:
-        if request.method == 'POST':
-            shoes = Shoes.objects.get(id=shoes_id)
-    except (KeyError, Shoes.DoesNotExist):
-        return render(request, 'mainShop/detail.html',
-                      {'error_message': "Error! You can't buy this pair!"})
-    else:
-        shoes.sale_cnt += 1
-        shoes.save()
-        return redirect('userOrder:order', id=shoes_id)

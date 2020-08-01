@@ -16,7 +16,7 @@
 
 		    <div class="form-group">
 		    	{% if form.name.errors %}
-	  				<span class="text-danger">{{ form.name.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 			    <input type="text" name="name" class="form-control" id="id_sender" placeholder="Имя..." required>
 			    <small id="nameHelp" class="form-text text-muted">Ваше полное имя</small>
@@ -24,7 +24,7 @@
 
 	  		<div class="form-group">
 	  			{% if form.surname.errors %}
-	  				<span class="text-danger">{{ form.surname.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 			    <input type="text" name="surname" class="form-control" id="id_sender" placeholder="Фамилия..." required>
 			    <small id="surnameHelp" class="form-text text-muted">Ваша фамилия</small>
@@ -32,7 +32,7 @@
 
 	  		<div class="form-group">
 	  			{% if form.size.errors %}
-	  				<span class="text-danger">{{ form.size.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 			    <input type="text" name="size" class="form-control" id="id_sender" placeholder="Размер..." required>
 			    {% if size_list %}
@@ -42,7 +42,7 @@
 
 	  		<div class="form-group">
 	  			{% if form.phone.errors %}
-	  				<span class="text-danger">{{ form.phone.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 				<div class="input-group-prepend">
 		        	<div class="input-group-text">+38</div>
@@ -53,7 +53,7 @@
 
 	  		<div class="form-group">
 	  			{% if form.address.errors %}
-	  				<span class="text-danger">{{ form.address.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 			    <input type="text" name="address" class="form-control" id="id_sender" placeholder="Адрес" required>
 			    <small id="addressHelp" class="form-text text-muted">Адрес для доставки заказа</small>
@@ -61,7 +61,7 @@
 
 		    <div class="form-group">
 		    	{% if form.from_email.errors %}
-	  				<span class="text-danger">{{ form.from_email.errors }} Вы неправильно заполнили это поле.</span>
+	  				<span class="text-danger">Вы неправильно заполнили это поле.</span>
 	  			{% endif %}
 			    <input type="text" name="from_email" class="form-control" id="id_sender" placeholder="Email" required>
 			    <small id="emailHelp" class="form-text text-muted">В целях конфиденциальности мы никому не сообщим ваш e-mail</small>
