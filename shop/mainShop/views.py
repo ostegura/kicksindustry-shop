@@ -30,6 +30,13 @@ class FemaleListView(generic.ListView):
         return context
 
 
+class ReturnAndExchangeView(generic.TemplateView):
+    template_name = 'mainShop/return_and_exchange.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        return context
+
 # start of menu detail view (example: nike (male) -> nike shoes)
 
 

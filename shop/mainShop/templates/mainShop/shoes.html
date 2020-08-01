@@ -89,12 +89,17 @@
 
 	    <p class="card-text">
 	        <div class="form-group d-flex justify-content-center">
-	            <label for="size"><b>Размеры:</b></label>
-	    	    <select class="form-control align-top" style="width: auto;" id="size">
-		    	    {% for size in sizes %}
-	    			    <option value="{{ size.model_size }}"> {{ size.model_size }} </option>
-		    	    {% endfor %}
-	    	    </select>
+                <div class="btn-group" role="group" aria-label="Размеры" id="size">
+                    <label class="mt-2" for="size"><b>Размеры:</b></label>
+                    {% for size in sizes %}
+                        <button type="button" class="btn btn-outline-dark ml-1">{{ size.model_size }}</button>
+                    {% endfor %}
+                </div>
+{#	    	    <select class="form-control align-top" style="width: auto;" id="size">#}
+{#		    	    {% for size in sizes %}#}
+{#	    			    <option value="{{ size.model_size }}"> {{ size.model_size }} </option>#}
+{#		    	    {% endfor %}#}
+{#	    	    </select>#}
 	    	 </div>
 	    </p>
 	    <p class="card-text text-justify"><b>Описание:</b> {{ shoes.description }}</p>
@@ -219,10 +224,6 @@
 	    	{% endif %}
 
 	    	<div class="d-flex justify-content-center" style="margin-top: 10px;">
-{#				<form action="{% url 'mainShop:buy' shoes.id %}" method="post">#}
-{#		    		{% csrf_token %}#}
-{#		    		<input class="btn btn-primary bg-info text-white" type="submit" value="Оформить">#}
-{#				</form>#}
                 <a href="{% url 'userOrder:order' shoes.id %}" class="btn btn-primary">Оформить</a>
 	    	</div>
 	    </div>

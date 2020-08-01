@@ -44,7 +44,7 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" style="font-family: sans-serif;">
-          <ul class="nav nav-pills justify-content-around">
+          <ul class="nav nav-pills justify-content-between">
             <li class="nav-item">
               <a class="nav-link active" href="{% url 'homepage:index' %}">Главная</a>
             </li>
@@ -53,6 +53,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'mainShop:women' %}">Женская обувь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainShop:test' %}">Возврат и обмен</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'contact:contacts' %}">Обратная связь</a>
