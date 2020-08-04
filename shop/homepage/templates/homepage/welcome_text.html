@@ -3,52 +3,38 @@
 {% load static %}
 
 {% block carousele %}
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-  </ol>
+<style>
+    .bg-image-full {
+      background: no-repeat center center scroll;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+      -o-background-size: cover;
+    }
+</style>
 
-  <div class="carousel-inner" role="listbox">
-    <!-- Slide One - Set the background image for this slide in the line below -->
-    <div class="carousel-item active" style="background-image: url('/static/homepage/images/b1.png');">
-    </div>
-    <div class="carousel-item" style="background-image: url('/static/homepage/images/b2.jpg')">
-    </div>
-    <div class="carousel-item" style="background-image: url('/static/homepage/images/b3.jpg')">
-    </div>
-    <div class="carousel-item" style="background-image: url('/static/homepage/images/b4.jpg')">
-    </div>
-    <div class="carousel-item" style="background-image: url('/static/homepage/images/b5.jpg')">
-    </div>
-    <div class="carousel-item" style="background-image: url('/static/homepage/images/b6.jpg')">
-    </div>
-  </div>
-
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+<div class="py-5 bg-image-full" style="background-image: url({% static 'homepage/images/banner1.jpg' %});">
+<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 195px;"></div>
 </div>
-{% endblock carousele %}
 
-
-{% block content %}
-
-<!-- Page Content -->
-<section class="py-5">
-  <div class="container" style="text-align: left;">
-    <h1 style="font-family: sans-serif;">Kicks Industry shop!</h1>
-    <p class="lead" style="font-family: serif;">Мы ради приветствовать вас в нашем магазине <a href="#">Kicks Industry</a>! Вся обувь является исключительно оригинальной! Приятных покупок!</p>
-  </div>
+<!-- Content section -->
+<section class="py-3">
+    <div class="container">
+        <h1>Kicks Industry</h1>
+        <p class="lead">г. Ужгород, ул. Льва Толстого, 5, 1-ый этаж</p>
+        <p class="text-justify" style="font-family: sans-serif;">Мы рады приветствовать Вас в нашем магазине <span style="color: forestgreen;"><strong>Kicks Industry</strong></span>!
+            Здесь вы можете найти исключительно <strong>оригинальную</strong> обувь.
+            Наш персонал всегда рад подобрать для Вас пару кроссовок, которая подойдёт как для тренировок, бега, так и для повсдневнных прогулок. </p>
+        <p class="text-justify" style="font-family: sans-serif;">Доставка по всей территории Украины, работаем наложенным платежом, есть обмен и возврат в течении 14 дней.</p>
+        <p class="text-justify" style="font-family: sans-serif;">С каждой покупкой Вы получаете сертификат со скидкой на следующий заказ при условии полной предоплаты.</p>
+        <p class="text-justify" style="font-family: sans-serif;">Приятного шоппинга!</p>
+    </div>
 </section>
 
-{% endblock content %}
+<!-- Image element - set the background image for the header in the line below -->
+<div class="py-5 bg-image-full" style="background-image: url({% static 'homepage/images/banner2.jpg' %});">
+<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 195px;"></div>
+</div>
+{% endblock carousele %}

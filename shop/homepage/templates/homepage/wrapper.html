@@ -5,7 +5,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Kicks Industry</title>
+      <meta name="description" content="Магазин Kicks Industry предлагает клиенту большой выбор оригинальной обуви с качественным обслуживанием. Доставка осуществляется по всей територии Украины.">
       {% load static %}
+
 
       <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/images/apple-touch-icon.png' %}">
       <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/images/favicon-32x32.png' %}">
@@ -32,6 +34,8 @@
         ga('send', 'pageview');
         </script>
         <!-- End Google Analytics -->
+{#      AdSense script#}
+      <script data-ad-client="ca-pub-8196126504118351" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="font-size: 18px; font-weight: bold;">
@@ -46,7 +50,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" style="font-family: sans-serif;">
           <ul class="nav nav-pills justify-content-between">
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'homepage:index' %}">Главная</a>
+                <a class="nav-link active" href="{% url 'homepage:index' %}">Главная</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'mainShop:men' %}">Мужская обувь</a>
@@ -55,7 +59,7 @@
                 <a class="nav-link" href="{% url 'mainShop:women' %}">Женская обувь</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'mainShop:test' %}">Возврат и обмен</a>
+                <a class="nav-link" href="{% url 'mainShop:exchange' %}">Возврат и обмен</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'contact:contacts' %}">Обратная связь</a>
@@ -99,17 +103,23 @@
           </div>
           <!-- Grid column -->
 
-          <!-- Grid column -->
-          <div class="col-md-2">
-              <!-- Links -->
-              <div class="d-flex justify-content-center">
-                <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="" style="width: 80px; height: 40px; margin-bottom: 5px;">
-              </div>
+            <!-- Grid column -->
+          <div class="col-md-3">
+              <div class="container h-100" style="height: 40px; width: 150px;">
+                 <div class="row h-100 justify-content-center align-items-center">
+                    <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="">
+                 </div>
+             </div>
+          </div>
 
-              <ul class="list-group list-group-flush">
+          <!-- Grid column -->
+          <div class="col-md-3">
+              <!-- Links -->
+              <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item"><a href="{% url 'homepage:index' %}">Главная</a></li>
                 <li class="list-group-item"><a href="{% url 'mainShop:men' %}">Мужская обувь</a></li>
                 <li class="list-group-item"><a href="{% url 'mainShop:women' %}">Женская обувь</a></li>
+                <li class="list-group-item"><a href="{% url 'mainShop:exchange' %}">Возврат и обмен</a>
                 <li class="list-group-item"><a href="{% url 'contact:contacts' %}">Обратная связь</a></li>
               </ul>
           </div>
@@ -120,8 +130,8 @@
       <!-- Footer Links -->
 
       <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="{% url 'homepage:index' %}"> kicksindustry.com </a>
+      <div class="footer-copyright text-center py-3">
+          © {% now "Y" %} Copyright: <a href="{% url 'homepage:index' %}"> kicksindustry.com.ua </a>
       </div>
       <!-- Copyright -->
 
