@@ -13,8 +13,9 @@
 			<div class="row justify-content-md-center">
 			    {% for img in images %}
 			  	    <div class="col col-md-2">
+                        
 						<a data-toggle="modal" data-target="#image{{ forloop.counter }}">
-						  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom" src="{{ img.image.url }}" alt="{{ shoes.category.name }}" style="margin-top: 10px;">
+						  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom" src="{{ img.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}" style="margin-top: 10px;">
 						</a>
 
 						<!-- Modal -->
@@ -28,7 +29,7 @@
 					            </button>
 					      	    <h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
 
-						        <img class="img-fluid card-img-top rounded d-block" src="{{ img.image.url }}" alt="{{ shoes.category.name }}">
+						        <img class="img-fluid card-img-top rounded d-block" src="{{ img.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -42,7 +43,7 @@
 
 				<div class="container d-flex justify-content-center">
 					<a class="btn btn-link" data-toggle="modal" data-target="#core-image-zoom">
-					  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom border border-left-0 border-right-0" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }}" style="width: 400px; margin-top: 10px;">
+					  	<img class="img-fluid card-img-top rounded mx-auto d-block img-circle zoom border border-left-0 border-right-0" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }} {% for item in shoes.modelsizelist.shoessize_set.all %} {{ item.model_size }} {% endfor %}" style="width: 400px; margin-top: 10px;">
 					</a>
 
 					<!-- Modal -->
@@ -56,7 +57,7 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					        <img class="img-fluid card-img-top rounded d-block" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }}">
+					        <img class="img-fluid card-img-top rounded d-block" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}">
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -89,22 +90,17 @@
 
 	    <p class="card-text">
 	        <div class="form-group d-flex justify-content-center">
-                <div class="btn-group" role="group" aria-label="Размеры" id="size">
+	            <div class="btn-group" role="group" aria-label="Размеры" id="size">
                     <label class="mt-2" for="size"><b>Размеры:</b></label>
                     {% for size in sizes %}
                         <button type="button" class="btn btn-outline-dark ml-1">{{ size.model_size }}</button>
                     {% endfor %}
                 </div>
-{#	    	    <select class="form-control align-top" style="width: auto;" id="size">#}
-{#		    	    {% for size in sizes %}#}
-{#	    			    <option value="{{ size.model_size }}"> {{ size.model_size }} </option>#}
-{#		    	    {% endfor %}#}
-{#	    	    </select>#}
 	    	 </div>
 	    </p>
-	    <p class="card-text text-justify"><b>Описание:</b> {{ shoes.description }}</p>
+	    <p class="card-text text-justify">{{ shoes.description }}</p>
 
-        <div id="accordion" class="mw-100">
+        <div id="accordion">
 		  <div class="card">
 		    <div class="card-header" id="headingOne">
 		      <h5 class="mb-0">
@@ -117,7 +113,7 @@
 		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 		      <div class="card-body">
 		        <a class="btn btn-link" data-toggle="modal" data-target="#size-table-zoom">
-				  	<img class="img-fluid rounded mx-auto d-block" src="{{ size_table.url }}" alt="{{ shoes.name }}" style="margin-top: 10px;">
+				  	<img class="img-fluid rounded mx-auto d-block" src="{{ size_table.url }}" alt="{{ shoes.category.name }} {{ shoes.model }} size table" style="margin-top: 10px;">
 				</a>
 
 				<!-- Modal -->
@@ -131,7 +127,7 @@
 				        </button>
 				      	<h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
 
-				        <img class="img-fluid card-img-top rounded d-block" src="{{ size_table.url }}" alt="{{ shoes.category.name }}">
+				        <img class="img-fluid card-img-top rounded d-block" src="{{ size_table.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}">
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -156,7 +152,7 @@
 
 		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 		      <div class="card-body">
-		        <p class="card-text">Возврат товара в течение 14 дней за счет покупателя.</p>
+		        <p class="card-text">Возврат товара в течении 14 дней за счет покупателя.</p>
 
 		        <!-- Button trigger modal -->
 				<button type="button" class="btn btn-info bg-info text-white" data-toggle="modal" data-target="#exampleModalCenter" style="color: black;">
@@ -185,7 +181,7 @@
 							Согласно действующему законодательству вы можете вернуть товар надлежащего качества или обменять его, если:
 							<br>
 							<ul>
-								<li>товар не был в употреблении и не имеет следов использования потребителем: царапин, сколов, потёртостей, пятен и т. п.;</li>
+								<li>товар не был в употреблении и не имеет следов использования потребителем: царапин, потёртостей, пятен и т. п.;</li>
 								<li>товар полностью укомплектован и сохранена фабричная упаковка;</li>
 								<li>сохранены все ярлыки и заводская маркировка;</li>
 								<li>товар сохраняет товарный вид и свои потребительские свойства.</li>
@@ -205,21 +201,20 @@
 		   </div>
 
 		  </div>
-		  
 		</div>
 
 	    <div class="card-footer" style="margin: auto;">
 
 	    	{% if shoes.discount == True %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-danger text-dark" style="font-size: 19px; font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} грн.</s> </span></p>
+		    		<p><span class="alert alert-danger text-dark" style="font-size: 18px; font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} &#8372;</s> </span></p>
 		    	</div>
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
+		    		<p><span class="alert alert-success text-dark" style="font-size: 18px; font-style: italic;"><b>Новая цена:</b> {{ shoes.price_after_discount }} &#8372;</span></p>
 		    	</div>
 		    {% else %}
 		    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-		    		<p><span class="alert alert-success text-dark" style="font-size: 19px; font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
+		    		<p><span class="alert alert-success text-dark" style="font-size: 18px; font-style: italic;"><b>Цена:</b> {{ shoes.price }} &#8372;</span></p>
 		    	</div>
 	    	{% endif %}
 

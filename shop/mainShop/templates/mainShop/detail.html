@@ -43,10 +43,11 @@
                             <form method="GET">
                                 <div class="form-group">
                                     {{ filter.form.model|as_crispy_field }}
+{#                                    {{ filter.form.test|as_crispy_field }}#}
                                     {{ filter.form.price__gt|as_crispy_field }}
                                     {{ filter.form.price__lt|as_crispy_field }}
+                                    {{ filter.form.size|as_crispy_field }}
                                     {{ filter.form.ordering|as_crispy_field }}
-{#                                    {{ filter.form|crispy }}#}
                                     <div class="row justify-content-center align-items-center">
                                         <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
                                     </div>
@@ -64,34 +65,34 @@
 	<div class="container" style="font-family: sans-serif;">
 		<div class="row">
 			{% for shoes in object_list %}
-				<div class="card col-md-3 mx-auto shadow-lg" style="width: 16rem; height: auto; margin-top: 10px;">
-				     <div class="container h-100" style="height: 200px; width: 200px;">
+				<div class="card col-md-offset-3 mx-auto shadow-lg" style="width: 16rem; height: auto; margin-top: 10px;">
+				     <div class="container h-100" style="height: 200px; width: auto;">
                          <div class="row h-100 justify-content-center align-items-center">
-                             <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block mt-1" src="{{ shoes.image.url }}" alt="Card image cap" style="width: 200px;"></a>
+                             <a href="{% url 'mainShop:shoes' shoes.slug %}"><img class="img-fluid card-img-top rounded mx-auto d-block mt-1" src="{{ shoes.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}" style="width: 200px;"></a>
                          </div>
                      </div>
 
-				  <div class="card-body">
-				    <div class="container" style="height: 40px;">
+				  <div class="card-body py-1">
+				    <div class="container" style="height: auto;">
                         <h6 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.category.name }} {{ shoes.model }}</b></h6>
                     </div>
 
 				    {% if shoes.is_active == True %}
-					    <p class="card-text text-center"><span class="text-success"><b>В наличии</b></span></p>
+					    <p class="card-text text-center" style="font-size: 14px;"><span class="text-success"><b>В наличии</b></span></p>
 			    	{% else %}
-					    <p class="card-text text-center"><span class="text-danger"><b>Нет в наличии</b></span></p>
+					    <p class="card-text text-center" style="font-size: 14px;"><span class="text-danger"><b>Нет в наличии</b></span></p>
 			    	{% endif %}
 
 					{% if shoes.discount == True %}
-				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-danger text-dark" style="font-style: italic;"><s><b>Цена:</b> {{ shoes.price }} грн.</s> </span></p>
+				    	<div class="d-flex justify-content-center">
+				    		<p><span class="btn btn-outline-dark"><s>{{ shoes.price }} &#8372;</s> </span></p>
 				    	</div>
-				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price_after_discount }} грн.</span></p>
+				    	<div class="d-flex justify-content-center">
+				    		<p><span class="btn btn-outline-dark">{{ shoes.price_after_discount }} &#8372;</span></p>
 				    	</div>
 				    {% else %}
-				    	<div class="d-flex justify-content-center" style="margin-top: 15px;">
-				    		<p><span class="alert alert-success text-dark" style="font-style: italic;"><b>Цена:</b> {{ shoes.price }} грн.</span></p>
+				    	<div class="d-flex justify-content-center">
+				    		<p><span class="btn btn-outline-dark"><b>Цена: </b>{{ shoes.price }} &#8372;</span></p>
 				    	</div>
 			    	{% endif %}
 
