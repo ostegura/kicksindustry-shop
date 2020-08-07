@@ -74,7 +74,7 @@
 
 				  <div class="card-body py-1">
 				    <div class="container" style="height: auto;">
-                        <h6 class="card-title mb-3" style="text-align: center; margin: auto;"><b>{{ shoes.category.name }} {{ shoes.model }}</b></h6>
+                        <h6 class="card-title mb-3" style="text-align: center; margin: auto;">Кроссовки <b>{{ shoes.category.name }} {{ shoes.model }}</b></h6>
                     </div>
 
 				    {% if shoes.is_active == True %}
@@ -85,10 +85,10 @@
 
 					{% if shoes.discount == True %}
 				    	<div class="d-flex justify-content-center">
-				    		<p><span class="btn btn-outline-dark"><s>{{ shoes.price }} &#8372;</s> </span></p>
+				    		<p><span class="btn btn-outline-dark"><s><b>Цена: </b>{{ shoes.price }} &#8372;</s> </span></p>
 				    	</div>
 				    	<div class="d-flex justify-content-center">
-				    		<p><span class="btn btn-outline-dark">{{ shoes.price_after_discount }} &#8372;</span></p>
+				    		<p><span class="btn btn-outline-dark"><b>Цена: </b>{{ shoes.price_after_discount }} &#8372;</span></p>
 				    	</div>
 				    {% else %}
 				    	<div class="d-flex justify-content-center">

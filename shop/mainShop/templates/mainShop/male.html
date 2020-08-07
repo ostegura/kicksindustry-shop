@@ -34,7 +34,7 @@
         		  </a>
         		  <div class="card-body">
         		    {% if pos.sex == 'men' %}
-        	  		    <h5 class="card-title mb-3 mx-auto text-center"><a class="text-dark" href="{% url 'mainShop:detail' pos.id %}" style="font-size: 18px;">{{ pos.name }}</a> <span class="badge badge-success">{{ pos.shoes_set.count }}</span></h5>
+        	  		    <h5 class="card-title mb-3 mx-auto text-center"><a class="text-dark" href="{% url 'mainShop:detail' pos.id %}" style="font-size: 18px;">Кроссовки (мужские) <strong>{{ pos.name }}</strong></a> <span class="badge badge-success">{{ pos.shoes_set.count }}</span></h5>
         	  	    {% endif %}
         		    <div class="card-footer d-flex justify-content-center">
         			    <a href="{% url 'mainShop:detail' pos.slug %}" class="btn btn-primary bg-info text-white">Перейти</a>

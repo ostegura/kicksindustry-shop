@@ -142,3 +142,6 @@ EMAIL_HOST_PASSWORD = 'stegura88'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LIQPAY_PUBLIC_KEY = 'public_key'
+LIQPAY_PRIVATE_KEY = 'private_key'
