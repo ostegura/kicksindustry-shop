@@ -11,6 +11,10 @@ def index(request):
 
 
 def mailingView(request):
+    title = 'Подписка - Kicks Industry'
+    description = 'Подпишись на рассылку ➦Kicks Industry и получи лучшие предложения. ' \
+                  '☎: (099) 743-68-85 $ лучшие цены ✈ быстрая доставка ₴ Скидочные сертификаты'
+    keywords = 'Обратная связь, почта, рассылка'
     if request.method == 'POST':
         user = GetUserContactForm(request.POST)
         if user.is_valid():
@@ -19,11 +23,14 @@ def mailingView(request):
             UserForMailing.objects.create(name=name, email=email)
             return render(request, 'homepage/mailing_success.html')
         else:
-            error_message = 'Please, fill fields correctly!'
+            error_message = 'Пожалуйста, заполните поля правильно!'
             return render(request, 'homepage/mailing.html',
                           {'form': user,
                            'error': error_message,
                            })
     else:
         user = GetUserContactForm()
-    return render(request, 'homepage/mailing.html', {'form': user})
+    return render(request, 'homepage/mailing.html', {'form': user,
+                                                     'description': description,
+                                                     'keywords': keywords,
+                                                     'title': title})

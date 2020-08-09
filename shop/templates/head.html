@@ -3,20 +3,36 @@
 
     {% include 'scripts.html' %}
 
-    <title>Kicks Industry</title>
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Kicks Industry - интернет-магазин обуви</title>
+        <meta name="title" content="Kicks Industry - интернет-магазин обуви">
+        <meta property=”og:title” content="Kicks Industry - интернет-магазин обуви"/>
+    {% endif %}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="title" content="Магазин обуви Kicks Industry">
-    <meta name="description" content="Купить кроссовки Ужгород - лучшая цена - оригинальная обувь - доставка по Украине. В наличии: Adidas, Nike, New Balance, Reebok, Puma, Saucony, Native.">
-    <meta name="keywords" content="Adidas, Nike, Puma, New Balance, Reebok, Украина, купить кроссовки, купить обувь, Адидас, Найк, Рибок">
 
-    <meta property=”og:title” content="Магазин обуви Kicks Industry"/>
+    {% if description %}
+        <meta name="description" content="{{ description }}">
+        <meta property=”og:description” content="{{ description }}" />
+    {% else %}
+        <meta name="description" content="Купить кроссовки Ужгород - лучшая цена - оригинальная обувь - доставка по Украине. В наличии: Adidas, Nike, New Balance, Reebok, Puma, Saucony, Native.">
+    {% endif %}
+
+    {% if keywords %}
+        <meta name="keywords" content="{{ keywords }}">
+    {% else %}
+        <meta name="keywords" content="Adidas, Nike, Puma, New Balance, Reebok, Украина, купить кроссовки, купить обувь, Адидас, Найк, Рибок">
+    {% endif %}
+
     <meta property=”og:type” content="Магазин"/>
     <meta property=”og:URL” content="https://kicksindustry.com.ua"/>
     <meta property=”og:image” content="{% static 'homepage/images/logo.png' %}"/>
     <meta property=”og:site_name” content="Kicks Industry" />
-    <meta property=”og:description” content="Магазин Kicks Industry предлагает клиенту большой выбор оригинальной обуви с качественным обслуживанием. Доставка осуществляется по всей територии Украины." />
+
 
 {#    {% include 'structured_data.html' %}#}
 

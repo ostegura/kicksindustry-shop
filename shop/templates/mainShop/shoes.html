@@ -6,8 +6,30 @@
 
 
 {% block content %}
-	<div class="card shadow-lg" style="margin-top: 10px; font-family: sans-serif;">
+    <!-- Разметка JSON-LD, созданная Мастером разметки структурированных данных Google. -->
+    <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Product",
+      "name" : "{{ shoes.model }}",
+      "image" : "{{ shoes.image.url }}",
+      "description" : "{{ shoes.description }}",
+      "sku" : "{{ shoes.articul }}",
+      "brand" : {
+        "@type" : "Brand",
+        "name" : "{{ shoes.category.name }}"
+      },
+      "offers" : {
+        "@type" : "Offer",
+        "price" : "{{ shoes.price }}",
+        "availability" : "http://schema.org/InStock",
+        "priceCurrency" : "UAH",
+        "url" : "{{ shoes.get_absolute_url }}"
+      }
+    }
+    </script>
 
+	<div class="card shadow-lg" style="margin-top: 10px; font-family: sans-serif;">
 		<div class="container">
 			<div class="row justify-content-md-center">
 			    {% for img in images %}
@@ -26,7 +48,7 @@
     					      	<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 					                <span aria-hidden="true">&times;</span>
 					            </button>
-					      	    <h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
+					      	    <p style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</p>
 
 						        <img class="img-fluid card-img-top rounded d-block" src="{{ img.image.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}">
 						      </div>
@@ -50,7 +72,7 @@
 					  <div class="modal-dialog modal-lg" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h6 class="modal-title" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
+					        <p class="modal-title" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</p>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -72,7 +94,6 @@
 	  <div class="card-body text-center mx-auto">
 		<h1 class="card-title text-dark" style="font-size: 20px;">{{ shoes.category.name }} {{ shoes.model }}</h1>
 		<h2 class="card-title text-dark" style="font-size: 17px;">Артикул: {{ shoes.articul }}</h2>
-        <meta itemprop="sku" content="{{ shoes.articul }}">
 
 		<p class="card-text">
             {% if shoes.is_active == True %}
@@ -105,11 +126,11 @@
         <div id="accordion">
 		  <div class="card">
 		    <div class="card-header" id="headingOne">
-		      <h5 class="mb-0">
+		      <h3 class="mb-0">
 		        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: black;">
 		          <b>Как подобрать размер?</b>
 		        </button>
-		      </h5>
+		      </h3>
 		    </div>
 
 		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -127,7 +148,7 @@
 				      	<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
-				      	<h6 style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</h6>
+				      	<p style="text-align: center;" id="exampleModalLongTitle">{{ shoes.category.name }} {{ shoes.model }}</p>
 
 				        <img class="img-fluid card-img-top rounded d-block" src="{{ size_table.url }}" alt="{{ shoes.category.name }} {{ shoes.model }}">
 				      </div>
@@ -145,11 +166,11 @@
 
           <div class="card">
 		    <div class="card-header" id="headingTwo">
-		      <h5 class="mb-0">
+		      <h4 class="mb-0">
 		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: black;">
 		          <b>Условия возврата</b>
 		        </button>
-		      </h5>
+		      </h4>
 		    </div>
 
 		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -166,7 +187,7 @@
 				  <div class="modal-dialog modal-dialog-centered" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLongTitle">Условия возврата и обмена</h5>
+				        <h4 class="modal-title" id="exampleModalLongTitle">Условия возврата и обмена</h4>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
 				          <span aria-hidden="true">&times;</span>
 				        </button>

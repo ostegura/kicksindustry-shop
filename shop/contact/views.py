@@ -17,6 +17,10 @@ class MemberView(generic.ListView):
 
 
 def emailView(request):
+    title = 'Свяжитесь с нами - Kicks Industry'
+    description = 'Команда магазина ➦Kicks Industry свяжеться с вами в кратчайшие сроки. ' \
+                  '☎: (099) 743-68-85 $ лучшие цены ✈ быстрая доставка ₴ Скидочные сертификаты'
+    keywords = 'Обратная связь, почта'
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -27,8 +31,11 @@ def emailView(request):
             message = form.cleaned_data['message']
             try:
                 send_mail(subject, message, from_email,
-                          ['stegura99@gmail.com'])
+                          ['stegura99@gmail.com', ''])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return render(request, "contact/success.html")
-    return render(request, "contact/contacts.html", {'form': form})
+    return render(request, "contact/contacts.html", {'form': form,
+                                                     'description': description,
+                                                     'keywords': keywords,
+                                                     'title': title})

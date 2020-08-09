@@ -25,7 +25,7 @@ class Category(models.Model):
         return f'{self.name} {self.sex}'
 
     def get_absolute_url(self):
-        return reverse('category-detail', kwargs={'id': self.id})
+        return reverse('mainShop:detail', kwargs={'slug': self.slug})
 
 
 class Shoes(models.Model):
@@ -53,7 +53,7 @@ class Shoes(models.Model):
         return self.model
 
     def get_absolute_url(self):
-        return reverse('shoes-detail', kwargs={'slug': self.slug})
+        return reverse('mainShop:shoes', kwargs={'slug': self.slug})
 
 
 """ Start of gallery """
