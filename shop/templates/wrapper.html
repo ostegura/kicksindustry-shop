@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% include 'head.html' %}
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KTNM2SV"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {% include 'header.html' %}
+
+    {% block carousele %}
+    {% endblock%}
+
+    {% block content %}
+    {% endblock %}
+
+    <hr>
+
+    <div class="container text-center rounded" style="background: linear-gradient(90deg, rgba(53,94,0,1) 12%, rgba(38,175,0,0.8379726890756303) 43%, rgba(14,186,4,0.8323704481792717) 71%);">
+        <a href="{% url 'homepage:mailing' %}"><button type="button" class="btn btn-light mt-2 mb-2 text-dark" style="font-size: 18px;">Подпишись на рассылку!</button></a>
+    </div>
+
+    <hr>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+
+<!-- Footer -->
+<footer class="page-footer font-small" style="font-family: sans-serif;">
+  <!-- Footer Links -->
+  <div class="container">
+
+    <!-- Grid row -->
+    <div class="row justify-content-between">
+      <!-- Grid column -->
+
+      <div class="col-md-pull-4">
+        <!-- Content -->
+        <ul class="list-group">
+          <li class="list-group-item">Будни: <span class="float-right">10:00 - 20:00</span></li>
+          <li class="list-group-item">Выходные: <span class="float-right">10:00 - 20:00</span></li>
+          <li class="list-group-item">Тел.: <span class="float-right">0997436885 - Денис</span></li>
+          <li class="list-group-item">Viber, Telegram: <span class="float-right ml-2">+380997436885</span></li>
+          <li class="list-group-item">E-mail: <span class="float-right">kicksindustry@gmail.com</span></li>
+        </ul>
+      </div>
+      <!-- Grid column -->
+
+        <!-- Grid column -->
+      <div class="col-md-3">
+          <div class="container h-100" style="height: 40px; width: 150px;">
+             <div class="row h-100 justify-content-center align-items-center py-3">
+                <img src="{% static 'homepage/images/logo.png' %}" class="img img-fluid" alt="Kicks Industry Ужгород магазин обуви Nike, Adidas, Reebok, Saucony, New Balance, Asics, Puma, Native">
+             </div>
+         </div>
+      </div>
+
+      <!-- Grid column -->
+      <div class="col-md-3">
+          <!-- Links -->
+          <ul class="list-group list-group-flush text-center">
+            <li class="list-group-item"><a href="{% url 'homepage:index' %}">Главная</a></li>
+            <li class="list-group-item"><a href="{% url 'mainShop:men' %}">Мужская обувь</a></li>
+            <li class="list-group-item"><a href="{% url 'mainShop:women' %}">Женская обувь</a></li>
+            <li class="list-group-item"><a href="{% url 'mainShop:exchange' %}">Возврат и обмен</a>
+            <li class="list-group-item"><a href="{% url 'contact:contacts' %}">Обратная связь</a></li>
+          </ul>
+      </div>
+    </div>
+    <!-- Grid row -->
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+      © {% now "Y" %} Copyright: <a href="{% url 'homepage:index' %}"> kicksindustry.com.ua </a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+  <!-- Footer -->

@@ -14,7 +14,6 @@ from mainShop.models import Shoes, ShoesSize
 from liqpay import LiqPay
 
 from django.views.generic import TemplateView, View
-from django.shortcuts import render
 # Create your views here.
 
 
@@ -22,7 +21,7 @@ def UserOrderView(request, id):
     # print('1')
     shoes = get_object_or_404(Shoes, id=id)
     size_list = ShoesSize.objects.filter(shoes_size__shoes=shoes).order_by("model_size")
-    shoes_price = shoes.price
+    # shoes_price = shoes.price
 
     if request.method == 'POST':
         # print('2')
@@ -60,10 +59,10 @@ def UserOrderView(request, id):
                 shoes.save()
             except BadHeaderError:
                 return HttpResponse('Проблема с отправкой отчета о покупке.')
-            # return render(request, 'userOrder/success.html',
-            #               {'shoes': shoes,
-            #                'size': size})
-            return redirect('userOrder:pay_view', price=shoes_price)
+            return render(request, 'userOrder/success.html',
+                          {'shoes': shoes,
+                           'size': size})
+            # return redirect('userOrder:pay_view', price=shoes_price)
         else:
             # print(user_order.errors)
             error_message = 'Пожалуйста, заполните поля правильно.'

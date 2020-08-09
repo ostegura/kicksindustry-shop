@@ -1,0 +1,35 @@
+{% extends 'wrapper.html' %}
+
+{% block content %}
+    <div class="d-flex justify-content-center mt-4" style="width: auto; padding-left: 5%; padding-right: 5%;">
+		<form method="post">
+
+		    {% csrf_token %}
+
+		    <div class="form-group">
+		    	{% if form.name.errors %}
+	  				<span class="text-danger">{{ form.name.errors }} Вы неправильно заполнили это поле.</span>
+	  			{% endif %}
+			    <input type="text" name="name" class="form-control" id="id_sender" placeholder="Имя..." required>
+			    <small id="nameHelp" class="form-text text-center text-muted">Ваше полное имя</small>
+	  		</div>
+
+		    <div class="form-group">
+		    	{% if form.email.errors %}
+	  				<span class="text-danger">{{ form.email.errors }} Вы неправильно заполнили это поле.</span>
+	  			{% endif %}
+			    <input type="text" name="email" class="form-control" id="id_sender" placeholder="Email" required>
+			    <small id="emailHelp" class="form-text text-muted">В целях конфиденциальности мы никому не сообщим ваш e-mail</small>
+	  		</div>
+
+		    <div class="form-actions d-flex justify-content-center">
+		      <input class="btn btn-success" type="submit" value="Подписаться">
+		    </div>
+		    <br>
+
+		    {% if error %}
+                <span class="text-center text-danger" style="font-size: 28px;"><strong> {{error}} </strong></span></p>
+			{% endif %}
+		</form>
+	</div>
+{% endblock %}

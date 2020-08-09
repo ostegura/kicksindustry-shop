@@ -1,0 +1,40 @@
+{% extends "wrapper.html" %}
+
+{% load static %}
+
+{% block carousele %}
+<style>
+    .bg-image-full {
+      background: no-repeat center center scroll;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+      -o-background-size: cover;
+    }
+</style>
+
+<div class="py-5 bg-image-full" style="background-image: url({% static 'homepage/images/banner1.jpg' %});">
+<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 195px;"></div>
+</div>
+
+<!-- Content section -->
+<section class="py-3">
+    <div class="container">
+        <h1>Kicks Industry</h1>
+        <h2 class="lead py-2">г. Ужгород, ул. Льва Толстого, 5, 1-ый этаж</h2>
+        <p class="text-justify" style="font-family: sans-serif;">Мы рады приветствовать Вас в нашем магазине <span style="color: forestgreen;"><strong>Kicks Industry</strong></span>!
+            Здесь вы можете найти исключительно <strong>оригинальную</strong> обувь.
+            Наш персонал всегда рад подобрать для Вас пару кроссовок, которая подойдёт как для тренировок, бега, так и для повсeдневных прогулок. </p>
+        <p class="text-justify" style="font-family: sans-serif;">Доставка по всей территории Украины, работаем наложенным платежом, есть обмен и возврат в течении 14 дней.</p>
+        <p class="text-justify" style="font-family: sans-serif;">С каждой покупкой Вы получаете сертификат со скидкой на следующий заказ при условии полной предоплаты.</p>
+        <p class="text-justify" style="font-family: sans-serif;">Приятного шоппинга!</p>
+    </div>
+</section>
+
+<!-- Image element - set the background image for the header in the line below -->
+<div class="py-5 bg-image-full" style="background-image: url({% static 'homepage/images/banner2.jpg' %});">
+<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 195px;"></div>
+</div>
+{% endblock carousele %}

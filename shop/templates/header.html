@@ -1,0 +1,34 @@
+{% load static %}
+
+<header class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 17px; font-weight: bold;">
+      <div class="container">
+        <a class="navbar-brand ml-4" href="{% url 'homepage:index' %}">
+          <img src="{% static 'homepage/images/logo.png' %}" alt="Kicks Industry Ужгород магазин обуви Nike, Adidas, Reebok, Saucony, New Balance, Asics, Puma, Native" style="height: 50px; width: 100px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" style="font-family: sans-serif;">
+          <ul class="nav nav-tabs justify-content-between ml-auto my-3 my-lg-0" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active text-success" href="{% url 'homepage:index' %}" role="tab" aria-selected="true">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'mainShop:men' %}" role="tab" aria-selected="false">Мужская обувь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'mainShop:women' %}" role="tab" aria-selected="false">Женская обувь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'mainShop:exchange' %}" role="tab" aria-selected="false">Возврат и обмен</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'contact:contacts' %}" role="tab" aria-selected="false">Обратная связь</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
