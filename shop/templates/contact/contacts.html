@@ -46,16 +46,16 @@
 {% endblock content %}
 
 {% block carousele %}
-<style>
-    .bg-image-full {
-      background: no-repeat center center scroll;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      background-size: cover;
-      -o-background-size: cover;
-    }
-</style>
-    <div class="py-5 bg-image-full" style="background-image: url('https://davidsbeenhere.com/wp-content/uploads/2019/10/shutterstock_593935445.jpg');">
+    <style>
+        .bg-image-full {
+          background: no-repeat center center scroll;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          background-size: cover;
+          -o-background-size: cover;
+        }
+    </style>
+    <div class="py-5 bg-image-full" style="background-image: url('{% static 'homepage/images/banner3.jpg' %}');">
     <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
         <div style="height: 240px;"></div>
     </div>
